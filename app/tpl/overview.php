@@ -3,11 +3,11 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    if(!ViroApp::LoggedIn()) {
-        //ViroApp::LoadView('login');
+    if(!Viro::LoggedIn()) {
+        //Viro::LoadView('login');
     }
 
-    $Connect = ViroApp::Connect();
+    $Connect = Viro::Connect();
 
     # SELECT Groups
     $getGroups = $Connect->prepare('SELECT * FROM "groups"');
