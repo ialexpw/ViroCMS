@@ -14,7 +14,7 @@
         }else{
             Viro::LoadView('login');
         }
-    }else{
+    }else{ // Need login check here
         Viro::LoadView($_GET['page']);
     }
 ?>
