@@ -74,9 +74,11 @@
 
             $db->exec('BEGIN');
 
+            $adUser = password_hash("password", PASSWORD_DEFAULT);
+
             # Admin user
             $db->query('INSERT INTO "users" ("username", "email", "password", "level", "last_login", "active")
-                        VALUES ("admin", "cms@viro.app", "test", "5", "0", "1")');
+                        VALUES ("admin", "cms@viro.app", ' . $adUser . ', "5", "0", "1")');
 
             # Generated group
             $db->query('INSERT INTO "groups" ("name", "slug", "hash", "owner", "created")
