@@ -4,6 +4,12 @@
     # SELECT Groups
     $getGroups = $Connect->prepare('SELECT * FROM "groups"');
     $getGroupsRes = $getGroups->execute();
+
+    # Deleting a group
+    if(isset($_GET['del']) && !empty($_GET['del'])) {
+        $getGroup = $Connect->prepare('SELECT * FROM "groups" WHERE g_hash = :g_hash');
+        $getGroupRes = $getGroups->execute();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +20,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Viro - Content</title>        
         <link rel="stylesheet" href="app/tpl/css/siimple.css">
+        <link rel="stylesheet" href="app/tpl/css/all.css">
         <style>
             /* Remove link styles from sidebar */
             .siimple-list-item a {
@@ -46,27 +53,27 @@
                         <div class="siimple-list siimple-list--hover">
                             <div class="siimple-list-item">
                                 <a href="?page=dashboard">
-                                    <div class="siimple-list-title">Dashboard</div>
+                                    <div class="siimple-list-title">Dashboard <div class="siimple--float-right"><i class="fas fa-home"></i></div></div>
                                 </a>
                             </div>
                             <div class="siimple-list-item">
                                 <a href="?page=content">
-                                    <div class="siimple-list-title">Content</div>
+                                    <div class="siimple-list-title">Content <div class="siimple--float-right"><i class="far fa-edit"></i></div></div>
                                 </a>
                             </div>
                             <div class="siimple-list-item">
                                 <a href="?page=articles">
-                                    <div class="siimple-list-title">Articles</div>
+                                    <div class="siimple-list-title">Articles <div class="siimple--float-right"><i class="far fa-newspaper"></i></div></div>
                                 </a>
                             </div>
                             <div class="siimple-list-item">
                                 <a href="?page=users">
-                                    <div class="siimple-list-title">User management</div>
+                                    <div class="siimple-list-title">User management <div class="siimple--float-right"><i class="far fa-user-circle"></i></div></div>
                                 </a>
                             </div>
                             <div class="siimple-list-item">
                                 <a href="?page=tools">
-                                    <div class="siimple-list-title">Backup &amp; restore</div>
+                                    <div class="siimple-list-title">Backup &amp; restore <div class="siimple--float-right"><i class="fas fa-sync-alt"></i></div></div>
                                 </a>
                             </div>
                         </div>
@@ -97,17 +104,17 @@
                                     while($aGroup = $getGroupsRes->fetchArray(SQLITE3_ASSOC)){
                                         # Lookup the owner
                                         $getGroupOwner = $Connect->prepare('SELECT * FROM "users" WHERE id = :userid LIMIT 1');
-                                        $getGroupOwner->bindValue(':userid', $aGroup['owner']);
+                                        $getGroupOwner->bindValue(':userid', $aGroup['g_owner']);
                                         $getOwnerRes = $getGroupOwner->execute();
 
                                         # Fetch the array
                                         $getOwnerRes = $getOwnerRes->fetchArray(SQLITE3_ASSOC);
 
                                         echo '<div class="siimple-table-row">';
-                                        echo '<div class="siimple-table-cell">' . $aGroup['name'] . '</div>';
-                                        echo '<div class="siimple-table-cell">' . $aGroup['slug'] . '</div>';
+                                        echo '<div class="siimple-table-cell">' . $aGroup['g_name'] . '</div>';
+                                        echo '<div class="siimple-table-cell">' . $aGroup['g_slug'] . '</div>';
                                         echo '<div class="siimple-table-cell">' . $getOwnerRes['username'] . '</div>';
-                                        echo '<div class="siimple-table-cell">View | Edit | Delete</div>';
+                                        echo '<div class="siimple-table-cell"><a href="?page=content-zones&hash=' . $aGroup['g_hash'] . '">View</a> | <a href="?page=content-edit&hash=' . $aGroup['g_hash'] . '">Edit</a> | <a href="?page=content&del=' . $aGroup['g_hash'] . '">Delete</a></div>';
                                         echo '</div>';
                                     }
                                 ?>
