@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="siimple-footer siimple-footer--extra-large">
-            &copy; 2018 ViroCMS.
+            &copy; 2018 ViroCMS - <?php echo Viro::Version(); ?>.
         </div>
     </body>
 </html>

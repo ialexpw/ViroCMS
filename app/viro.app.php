@@ -118,5 +118,9 @@
         public static function LoadPage($page) {
             header("Location: ?page=" . $page);
         }
+
+        public static function Version() {
+            return "v0.1-alpha";
+        }
     }
 ?>
