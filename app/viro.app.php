@@ -21,7 +21,7 @@
                 username varchar,
                 email varchar,
                 password varchar,
-                level integer,
+                u_level integer,
                 last_login varchar,
                 active integer
             )');
@@ -29,19 +29,19 @@
             # Groups table
             $db->query('CREATE TABLE IF NOT EXISTS groups (
                 id integer PRIMARY KEY AUTOINCREMENT,
-                name varchar,
-                slug varchar,
-                hash varchar,
-                owner integer,
+                g_name varchar,
+                g_slug varchar,
+                g_hash varchar,
+                g_owner integer,
                 created varchar
             )');
 
             # Zones table
             $db->query('CREATE TABLE IF NOT EXISTS zones (
                 id integer PRIMARY KEY AUTOINCREMENT,
-                name varchar,
-                slug varchar,
-                hash varchar,
+                z_name varchar,
+                z_slug varchar,
+                z_hash varchar,
                 group_id integer,
                 created varchar
             )');
@@ -50,7 +50,7 @@
             $db->query('CREATE TABLE IF NOT EXISTS content (
                 id integer PRIMARY KEY AUTOINCREMENT,
                 content varchar,
-                hash varchar,
+                c_hash varchar,
                 zone_id integer,
                 group_id integer,
                 created varchar,
@@ -63,7 +63,7 @@
                 title varchar,
                 author varchar,
                 content varchar,
-                hash varchar,
+                a_hash varchar,
                 created varchar,
                 updated varchar
             )');
@@ -79,20 +79,24 @@
             $adUser = password_hash("password", PASSWORD_DEFAULT);
 
             # Admin user
-            $db->query('INSERT INTO "users" ("username", "email", "password", "level", "last_login", "active")
+            $db->query('INSERT INTO "users" ("username", "email", "password", "u_level", "last_login", "active")
                         VALUES ("admin", "cms@viro.app", "' . $adUser . '", "5", "0", "1")');
 
             # Generated group
-            $db->query('INSERT INTO "groups" ("name", "slug", "hash", "owner", "created")
+            $db->query('INSERT INTO "groups" ("g_name", "g_slug", "g_hash", "g_owner", "created")
                         VALUES ("Main Group", "main-group", "grphash", "1", "0")');
 
             # Generated zone
-            $db->query('INSERT INTO "zones" ("name", "slug", "hash", "group_id", "created")
+            $db->query('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "group_id", "created")
                         VALUES ("Header Zone", "header-zone", "znehash", "1", "0")');
 
             # Generated content
-            $db->query('INSERT INTO "content" ("content", "hash", "zone_id", "group_id", "created")
+            $db->query('INSERT INTO "content" ("content", "c_hash", "zone_id", "group_id", "created")
                         VALUES ("Test Content", "conhash", "1", "1", "0")');
+
+            # Generated articles
+            $db->query('INSERT INTO "articles" ("title", "author", "content", "a_hash", "created", "updated")
+                        VALUES ("Test Title", "1", "Test content here", "cnhash", "0", "0")');
 
             $db->exec('COMMIT');
 
