@@ -112,5 +112,9 @@
                 include 'app/tpl/404.php';
             }
         }
+
+        public static function LoadPage($page) {
+            header("Location: ?page=" . $page);
+        }
     }
 ?>
