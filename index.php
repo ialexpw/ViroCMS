@@ -8,13 +8,13 @@
     $vApp = new Viro();
 
     # Simple templating
-    if(Viro::LoggedIn()) {
+    //if(Viro::LoggedIn()) {
         if(!isset($_GET['page']) || empty($_GET['page'])) {
-            Viro::LoadView('overview');
+            Viro::LoadView('dashboard');
         }else{
             Viro::LoadView($_GET['page']);
         }
-    }else{
-        Viro::LoadView('login');
-    }
+    //}else{
+        //Viro::LoadView('login');
+    //}
 ?>
