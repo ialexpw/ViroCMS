@@ -67,6 +67,7 @@
 
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
+                        
                         <a href="?page=create-group"><div class="siimple-btn siimple-btn--primary">Create Group</div></a><br /><br />
                         <div class="siimple-table siimple-table--striped">
                             <div class="siimple-table-header">
