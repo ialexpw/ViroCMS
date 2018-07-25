@@ -1,8 +1,10 @@
 <?php
+    # Start the session
     if(!headers_sent()) {
 		session_start();
     }
     
+    # ViroCMS Class
     class Viro {
         public static function Connect() {
             $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
