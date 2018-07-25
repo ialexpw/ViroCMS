@@ -1,8 +1,4 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
     $Connect = Viro::Connect();
 
     # SELECT Groups
@@ -67,7 +63,7 @@
 
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
-                        
+
                         <a href="?page=create-group"><div class="siimple-btn siimple-btn--primary">Create Group</div></a><br /><br />
                         <div class="siimple-table siimple-table--striped">
                             <div class="siimple-table-header">
