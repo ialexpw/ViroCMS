@@ -108,11 +108,26 @@
                         <div class="siimple-rule"></div>
 
                         <!-- WYSIWYG -->
-                        <div id="summernote">
-                            <?php
-                                echo $getContentRes['content'];
-                            ?>
-                        </div>
+                        <form action="?page=create-group" method="post">
+                            <div class="siimple-field">
+                                <div class="siimple-field-label">Website integration</div>
+                                <input type="text" class="siimple-input" name="website" disabled>
+                                <div class="siimple-field-helper">This should be copied in place of the content on the website template</div>
+                            </div>
+
+                            <div class="siimple-field">
+                                <div class="siimple-field-label">Zone content</div>
+                                <textarea id="summernote" name="editordata">
+                                    <?php
+                                        echo $getContentRes['content'];
+                                    ?>
+                                </textarea>
+                            </div>
+
+                            <div class="siimple-field">
+                                <button type="submit" class="siimple-btn siimple-btn--blue" value="Save content">Save Content</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
