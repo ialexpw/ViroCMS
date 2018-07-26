@@ -19,7 +19,7 @@
         $Connect->exec('BEGIN');
 
         # Insert the group
-        $Connect->query('INSERT INTO "groups" ("name", "slug", "hash", "owner", "created")
+        $Connect->query('INSERT INTO "groups" ("g_name", "g_slug", "g_hash", "g_owner", "created")
                     VALUES ("' . $grp . '", "' . $slg . '", "' . $grph . '", "1", "' . $ts . '")');
 
         # End the query
@@ -100,7 +100,7 @@
 
                     <div class="siimple-grid-col siimple-grid-col--9">
                         <div class="siimple-breadcrumb">
-                        <div class="siimple-breadcrumb-item">Dashboard</div>
+                            <div class="siimple-breadcrumb-item">Dashboard</div>
                             <div class="siimple-breadcrumb-item">Content</div>
                             <div class="siimple-breadcrumb-item">Create</div>
                         </div>
