@@ -42,7 +42,8 @@
                 z_name varchar,
                 z_slug varchar,
                 z_hash varchar,
-                group_id integer,
+                g_hash varchar,
+                z_owner varchar,
                 created varchar
             )');
 
@@ -51,9 +52,10 @@
                 id integer PRIMARY KEY AUTOINCREMENT,
                 content varchar,
                 c_hash varchar,
-                zone_id integer,
-                group_id integer,
+                z_hash varchar,
+                g_hash varchar,
                 created varchar,
+                edit_by varchar,
                 updated varchar
             )');
 
@@ -87,12 +89,12 @@
                         VALUES ("Main Group", "main-group", "grphash", "1", "0")');
 
             # Generated zone
-            $db->query('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "group_id", "created")
-                        VALUES ("Header Zone", "header-zone", "znehash", "1", "0")');
+            $db->query('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "g_hash", "z_owner", "created")
+                        VALUES ("Header Zone", "header-zone", "znehash", "grphash", "1", "0")');
 
             # Generated content
-            $db->query('INSERT INTO "content" ("content", "c_hash", "zone_id", "group_id", "created")
-                        VALUES ("Test Content", "conhash", "1", "1", "0")');
+            $db->query('INSERT INTO "content" ("content", "c_hash", "z_hash", "g_hash", "created", "edit_by", "updated")
+                        VALUES ("Test Content", "conhash", "znehash", "grphash", "0", "1", "0")');
 
             # Generated articles
             $db->query('INSERT INTO "articles" ("title", "author", "content", "a_hash", "created", "updated")
