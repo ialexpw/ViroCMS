@@ -8,7 +8,7 @@
         Viro::LoadPage('content');
     }
 
-    # SELECT Groups
+    # SELECT Zones
     $getZones = $Connect->prepare('SELECT * FROM "zones" WHERE g_hash = :g_hash');
     $getZones->bindValue(':g_hash', $grpHash);
     $getZonesRes = $getZones->execute();
@@ -23,7 +23,7 @@
         $rmZne->bindValue(':z_hash', $rmHash);
         $rmZne->execute();
 
-        Viro::LoadPage('content');
+        Viro::LoadPage('content-zones&hash=' . $grpHash);
     }
 ?>
 <!DOCTYPE html>
@@ -105,7 +105,7 @@
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
 
-                        <a href="?page=create-group"><div class="siimple-btn siimple-btn--primary">Create Zone</div></a><br /><br />
+                        <a href="?page=create-zone&amp;hash=<?php echo $_GET['hash']; ?>"><div class="siimple-btn siimple-btn--primary">Create Zone</div></a><br /><br />
                         <div class="siimple-table siimple-table--striped">
                             <div class="siimple-table-header">
                                 <div class="siimple-table-row">
@@ -130,7 +130,7 @@
                                         echo '<div class="siimple-table-cell">' . $aZone['z_name'] . '</div>';
                                         echo '<div class="siimple-table-cell">' . $aZone['z_slug'] . '</div>';
                                         echo '<div class="siimple-table-cell">' . $getOwnerRes['username'] . '</div>';
-                                        echo '<div class="siimple-table-cell"><a href="?page=content-edit&hash=' . $aZone['z_hash'] . '">Edit</a> | <a href="?page=content-zones&del=' . $aZone['z_hash'] . '">Delete</a></div>';
+                                        echo '<div class="siimple-table-cell"><a href="?page=content-edit&hash=' . $aZone['z_hash'] . '">Edit</a> | <a href="?page=content-zones&hash=' . $_GET['hash'] . '&del=' . $aZone['z_hash'] . '">Delete</a></div>';
                                         echo '</div>';
                                     }
                                 ?>
