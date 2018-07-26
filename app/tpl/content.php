@@ -7,8 +7,15 @@
 
     # Deleting a group
     if(isset($_GET['del']) && !empty($_GET['del'])) {
-        $getGroup = $Connect->prepare('SELECT * FROM "groups" WHERE g_hash = :g_hash');
-        $getGroupRes = $getGroups->execute();
+        # Group hash
+        $rmHash = $_GET['del'];
+
+        # Remove the group
+        $rmGrp = $Connect->prepare('DELETE FROM "groups" WHERE g_hash = :g_hash');
+        $rmGrp->bindValue(':g_hash', $rmHash);
+        $rmGrp->execute();
+
+        Viro::LoadPage('content');
     }
 ?>
 <!DOCTYPE html>
@@ -114,7 +121,7 @@
                                         echo '<div class="siimple-table-cell">' . $aGroup['g_name'] . '</div>';
                                         echo '<div class="siimple-table-cell">' . $aGroup['g_slug'] . '</div>';
                                         echo '<div class="siimple-table-cell">' . $getOwnerRes['username'] . '</div>';
-                                        echo '<div class="siimple-table-cell"><a href="?page=content-zones&hash=' . $aGroup['g_hash'] . '">View</a> | <a href="?page=content-edit&hash=' . $aGroup['g_hash'] . '">Edit</a> | <a href="?page=content&del=' . $aGroup['g_hash'] . '">Delete</a></div>';
+                                        echo '<div class="siimple-table-cell"><a href="?page=content-zones&hash=' . $aGroup['g_hash'] . '">View Zones</a> | <a href="?page=content&del=' . $aGroup['g_hash'] . '">Delete</a></div>';
                                         echo '</div>';
                                     }
                                 ?>
