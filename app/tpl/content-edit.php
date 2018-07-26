@@ -13,13 +13,12 @@
     $getContent->bindValue(':z_hash', $zneHash);
     $getContentRes = $getContent->execute();
 
-    echo count($getContentRes);
+    # Get the data
+    $getContentRes = $getContentRes->fetchArray(SQLITE3_ASSOC);
 
-    # Empty?
-    if(empty($getContentRes)) {
-        //echo 'woa';
-    }
-    //print_r($getContentRes->fetchArray(SQLITE3_ASSOC));
+    # TODO
+    //if(empty($getContentRes)) {
+    //}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,7 +108,11 @@
                         <div class="siimple-rule"></div>
 
                         <!-- WYSIWYG -->
-                        <div id="summernote"></div>
+                        <div id="summernote">
+                            <?php
+                                echo $getContentRes['content'];
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
