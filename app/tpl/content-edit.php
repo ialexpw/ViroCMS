@@ -8,6 +8,10 @@
         Viro::LoadPage('content');
     }
 
+    if(!empty($_POST)) {
+        print_r($_POST);
+    }
+
     # SELECT Content
     $getContent = $Connect->prepare('SELECT * FROM "content" WHERE z_hash = :z_hash');
     $getContent->bindValue(':z_hash', $zneHash);
@@ -108,7 +112,7 @@
                         <div class="siimple-rule"></div>
 
                         <!-- WYSIWYG -->
-                        <form action="?page=create-group" method="post">
+                        <form action="?page=content-edit&amp;hash=<?php echo $_GET['hash']; ?>" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Website integration</div>
                                 <input type="text" class="siimple-input" name="website" disabled>
@@ -117,7 +121,7 @@
 
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Zone content</div>
-                                <textarea id="summernote" name="editordata">
+                                <textarea id="summernote" name="editor">
                                     <?php
                                         echo $getContentRes['content'];
                                     ?>
