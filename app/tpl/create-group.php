@@ -24,11 +24,9 @@
 
         # End the query
         $Connect->exec('COMMIT');
-    }
 
-    # SELECT Groups
-    $getGroups = $Connect->prepare('SELECT * FROM "groups"');
-    $getGroupsRes = $getGroups->execute();
+        Viro::LoadPage('content');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
