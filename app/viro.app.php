@@ -21,7 +21,10 @@
                 username varchar,
                 email varchar,
                 password varchar,
-                u_level integer,
+                read varchar,
+                write varchar,
+                users varchar,
+                tools varchar,
                 last_login varchar,
                 active integer
             )');
@@ -81,8 +84,8 @@
             $adUser = password_hash("password", PASSWORD_DEFAULT);
 
             # Admin user
-            $db->query('INSERT INTO "users" ("username", "email", "password", "u_level", "last_login", "active")
-                        VALUES ("admin", "cms@viro.app", "' . $adUser . '", "5", "0", "1")');
+            $db->query('INSERT INTO "users" ("username", "email", "password", "read", "write", "users", "tools", "last_login", "active")
+                        VALUES ("admin", "cms@viro.app", "' . $adUser . '", "on", "on", "on", "on", "0", "1")');
 
             # Generated group
             $db->query('INSERT INTO "groups" ("g_name", "g_slug", "g_hash", "g_owner", "created")
@@ -105,8 +108,23 @@
             $db->close();
         }
 
+        public static function Content($content) {
+            $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+
+            # SELECT the content
+            $getContent = $db->prepare('SELECT * FROM "content" WHERE c_hash = :c_hash');
+            $getContent->bindValue(':c_hash', $content);
+            $getContentRes = $getContent->execute();
+
+            # Get content
+            $getContentRes = $getContentRes->fetchArray(SQLITE3_ASSOC);
+
+            # echo the content
+            echo $getContentRes['content'];
+        }
+
         public static function LoggedIn() {
-            if(!isset($_SESSION['Logged_In']) || !isset($_SESSION['User'])) {
+            if(!isset($_SESSION['UserID']) || !isset($_SESSION['Username'])) {
 				return 0;
 			}else{
 				return 1;
