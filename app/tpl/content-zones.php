@@ -23,6 +23,11 @@
         $rmZne->bindValue(':z_hash', $rmHash);
         $rmZne->execute();
 
+        # Remove the content
+        $rmZne = $Connect->prepare('DELETE FROM "content" WHERE z_hash = :z_hash');
+        $rmZne->bindValue(':z_hash', $rmHash);
+        $rmZne->execute();
+
         Viro::LoadPage('content-zones&hash=' . $grpHash);
     }
 ?>
@@ -55,7 +60,7 @@
         </div>
 
         <div class="siimple-jumbotron siimple-jumbotron--extra-large siimple-jumbotron--light">
-            <div class="siimple-jumbotron-title">Welcome!</div>
+            <div class="siimple-jumbotron-title">Content - Zones</div>
             <div class="siimple-jumbotron-detail">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  
             </div>
@@ -117,7 +122,7 @@
                             </div>
                             <div class="siimple-table-body">
                                 <?php
-                                    while($aZone = $getZonesRes->fetchArray(SQLITE3_ASSOC)){
+                                    while($aZone = $getZonesRes->fetchArray(SQLITE3_ASSOC)) {
                                         # Lookup the owner
                                         $getZoneOwner = $Connect->prepare('SELECT * FROM "users" WHERE id = :userid LIMIT 1');
                                         $getZoneOwner->bindValue(':userid', $aZone['z_owner']);
