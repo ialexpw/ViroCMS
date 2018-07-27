@@ -54,16 +54,12 @@
         <meta name="robots" content="index, follow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Viro - Users</title>        
+        <title>ViroCMS - Users</title>
+
+        <!-- Styles -->
         <link rel="stylesheet" href="app/tpl/css/siimple.css">
         <link rel="stylesheet" href="app/tpl/css/all.css">
-        <style>
-            /* Remove link styles from sidebar */
-            .siimple-list-item a {
-                color: inherit;
-                text-decoration: inherit;
-            }
-        </style>
+        <link rel="stylesheet" href="app/tpl/css/viro.css">
     </head>
 
     <body>
@@ -199,8 +195,6 @@
                             <div class="siimple-field">
                                 <button type="submit" class="siimple-btn siimple-btn--primary" value="Update Permissions">Update Permissions</button>
                             </div>
-
-                            <a href="?page=create-group"><div class="siimple-btn siimple-btn--primary">Update Permissions</div></a>
                         </form>
                     </div>
                 </div>

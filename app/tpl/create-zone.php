@@ -45,16 +45,12 @@
         <meta name="robots" content="index, follow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Viro - Create Zone</title>        
+        <title>ViroCMS - Create Zone</title>
+
+        <!-- Styles -->
         <link rel="stylesheet" href="app/tpl/css/siimple.css">
         <link rel="stylesheet" href="app/tpl/css/all.css">
-        <style>
-            /* Remove link styles from sidebar */
-            .siimple-list-item a {
-                color: inherit;
-                text-decoration: inherit;
-            }
-        </style>
+        <link rel="stylesheet" href="app/tpl/css/viro.css">
     </head>
 
     <body>

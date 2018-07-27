@@ -54,16 +54,12 @@
         <meta name="robots" content="index, follow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Viro - Login</title>        
+        <title>ViroCMS - Login</title>
+
+        <!-- Styles -->
         <link rel="stylesheet" href="app/tpl/css/siimple.css">
         <link rel="stylesheet" href="app/tpl/css/all.css">
-        <style>
-            /* Remove link styles from sidebar */
-            .siimple-list-item a {
-                color: inherit;
-                text-decoration: inherit;
-            }
-        </style>
+        <link rel="stylesheet" href="app/tpl/css/viro.css">
     </head>
 
     <body>
@@ -128,11 +124,11 @@
                         <form action="?page=login" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Username</div>
-                                <input type="text" class="siimple-input" name="username" placeholder="username">
+                                <input type="text" class="siimple-input" style="width:375px;" name="username" placeholder="username">
                             </div>
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Password</div>
-                                <input type="password" class="siimple-input" name="password" placeholder="password">
+                                <input type="password" class="siimple-input" style="width:375px;" name="password" placeholder="password">
                             </div>
                             <div class="siimple-field">
                                 <button type="submit" class="siimple-btn siimple-btn--blue" value="Create group">Login</button>

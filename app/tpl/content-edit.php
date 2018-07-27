@@ -40,19 +40,13 @@
         <meta name="robots" content="index, follow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Viro - Edit Content</title>
+        <title>ViroCMS - Edit Content</title>
 
         <!-- Styles -->
         <link rel="stylesheet" href="app/tpl/css/siimple.css">
         <link rel="stylesheet" href="app/tpl/css/all.css">
+        <link rel="stylesheet" href="app/tpl/css/viro.css">
         <link rel="stylesheet" href="app/tpl/css/summernote-lite.css">
-        <style>
-            /* Remove link styles from sidebar */
-            .siimple-list-item a {
-                color: inherit;
-                text-decoration: inherit;
-            }
-        </style>
 
         <!-- Javascript -->
         <script src="app/tpl/js/jquery-3.2.1.slim.min.js"></script>
