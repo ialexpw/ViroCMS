@@ -34,7 +34,7 @@
         </div>
 
         <div class="siimple-jumbotron siimple-jumbotron--extra-large siimple-jumbotron--light">
-            <div class="siimple-jumbotron-title">Welcome!</div>
+            <div class="siimple-jumbotron-title">Dashboard</div>
             <div class="siimple-jumbotron-detail">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  
             </div>
@@ -82,6 +82,13 @@
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
 
+                        <div class="siimple-card" style="max-width:300px;">
+                            <div class="siimple-card-body">
+                                <div class="siimple-card-title">Special card title</div>
+                                <div class="siimple-card-subtitle">Special card subtitle</div>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                            </div>
+                        </div>
                         
                     </div>
                 </div>
