@@ -1,0 +1,10 @@
+/* Remove link styles from sidebar */
+.siimple-list-item a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+/* Ensure font is the same */
+input, select, textarea, button{
+    font-family:inherit;
+}
