@@ -15,8 +15,11 @@
         # Time stamp
         $ts = time();
 
-        # Create a hash
+        # Create a zone hash
         $zneh = substr(sha1($ts . $zne . $slg), 0, 10);
+
+        # Create a content hash
+        $conh = substr(sha1($ts . $zne . $slg . "content"), 0, 10);
 
         # Begin the query
         $Connect->exec('BEGIN');
@@ -24,6 +27,10 @@
         # Insert the group
         $Connect->query('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "g_hash", "z_owner", "created")
                     VALUES ("' . $zne . '", "' . $slg . '", "' . $zneh . '", "' . $grp . '", "1", "' . $ts . '")');
+
+        # Insert the content
+        $Connect->query('INSERT INTO "content" ("content", "c_hash", "z_hash", "g_hash", "created", "edit_by", "updated")
+                    VALUES ("Example content", "' . $conh . '", "' . $zneh . '", "' . $grp . '", "' . $ts . '", "' . $_SESSION['UserID'] . '", "' . $ts . '")');
 
         # End the query
         $Connect->exec('COMMIT');
@@ -60,7 +67,7 @@
         </div>
 
         <div class="siimple-jumbotron siimple-jumbotron--extra-large siimple-jumbotron--light">
-            <div class="siimple-jumbotron-title">Welcome!</div>
+            <div class="siimple-jumbotron-title">Create zone</div>
             <div class="siimple-jumbotron-detail">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  
             </div>
