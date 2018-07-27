@@ -8,8 +8,15 @@
         Viro::LoadPage('content');
     }
 
-    if(!empty($_POST)) {
-        print_r($_POST);
+    if(!empty($_POST) && !empty($_POST['editor'])) {
+        # Content
+        $cntEdit = $_POST['editor'];
+
+        # Update the content field
+        $updateContent = $Connect->prepare('UPDATE "content" SET content = :content WHERE z_hash = :z_hash');
+        $updateContent->bindValue(':content', $cntEdit);
+        $updateContent->bindValue(':z_hash', $zneHash);
+        $updateContentRes = $updateContent->execute();
     }
 
     # SELECT Content
@@ -19,6 +26,8 @@
 
     # Get the data
     $getContentRes = $getContentRes->fetchArray(SQLITE3_ASSOC);
+
+    $pstData = '<?php Viro::Content(' . "'" . $getContentRes['c_hash'] . "'" .  '); ?>';
 
     # TODO
     //if(empty($getContentRes)) {
@@ -60,7 +69,7 @@
         </div>
 
         <div class="siimple-jumbotron siimple-jumbotron--extra-large siimple-jumbotron--light">
-            <div class="siimple-jumbotron-title">Welcome!</div>
+            <div class="siimple-jumbotron-title">Edit zone</div>
             <div class="siimple-jumbotron-detail">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  
             </div>
@@ -115,7 +124,7 @@
                         <form action="?page=content-edit&amp;hash=<?php echo $_GET['hash']; ?>" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Website integration</div>
-                                <input type="text" class="siimple-input" name="website" disabled>
+                                <input onClick="this.select();" type="text" style="width:50%;" class="siimple-input" name="website" value="<?php echo $pstData; ?>" readonly>
                                 <div class="siimple-field-helper">This should be copied in place of the content on the website template</div>
                             </div>
 
