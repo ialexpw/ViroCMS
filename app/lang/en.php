@@ -1,6 +1,4 @@
 <?php
-    global $l;
-    
     $l = array(
         # Menu
         'Profile'   => 'Profile',
