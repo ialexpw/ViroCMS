@@ -3,12 +3,11 @@
     if(!headers_sent()) {
 		session_start();
     }
-    
+
     # ViroCMS Class
     class Viro {
         public static function Connect() {
             $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
-
             return $db;
         }
 
@@ -70,7 +69,16 @@
                 content varchar,
                 a_hash varchar,
                 created varchar,
-                updated varchar
+                updated varchar,
+                published integer
+            )');
+
+            # Backups table
+            $db->query('CREATE TABLE IF NOT EXISTS backups (
+                id integer PRIMARY KEY AUTOINCREMENT,
+                title varchar,
+                author varchar,
+                created varchar
             )');
 
             $db->close();
@@ -142,6 +150,14 @@
             }else{
                 return false;
             }
+        }
+
+        public static function Backup() {
+            return;
+        }
+
+        public static function Restore($id) {
+            return;
         }
 
         public static function Translate($string, $lang) {
