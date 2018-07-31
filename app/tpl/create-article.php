@@ -25,11 +25,11 @@
         <link rel="stylesheet" href="app/tpl/css/siimple.css">
         <link rel="stylesheet" href="app/tpl/css/all.css">
         <link rel="stylesheet" href="app/tpl/css/viro.css">
-        <link rel="stylesheet" href="app/tpl/css/summernote-lite.css">
+        <link rel="stylesheet" href="app/tpl/css/trumbowyg.min.css">
 
         <!-- Javascript -->
-        <script src="app/tpl/js/jquery-3.2.1.slim.min.js"></script>
-        <script src="app/tpl/js/summernote-lite.js"></script>
+        <script src="app/tpl/js/jquery-3.2.1.min.js"></script>
+        <script src="app/tpl/js/trumbowyg.min.js"></script>
     </head>
 
     <body>
@@ -107,7 +107,7 @@
 
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Article content</div>
-                                <textarea id="summernote" name="editor"></textarea>
+                                <textarea id="virowyg" name="editor"></textarea>
                             </div>
 
                             <div class="siimple-field">
@@ -129,10 +129,7 @@
             &copy; 2018 ViroCMS - <?php echo Viro::Version(); ?>.
         </div>
         <script>
-            $('#summernote').summernote({
-                height: 250,
-                tabsize: 4,
-            });
+            $('#virowyg').trumbowyg();
         </script>
     </body>
 </html>
