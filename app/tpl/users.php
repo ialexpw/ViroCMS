@@ -1,10 +1,13 @@
 <?php
     $Connect = Viro::Connect();
 
+    # Permissions
+    if(!Viro::Permission('users')) {
+        Viro::LoadPage('access');
+    }
+
     # POSTed form
     if(isset($_POST) && !empty($_POST)) {
-        //print_r($_POST);
-
         # Set all to off, before updating (needs to be changed really..)
         $disUser = $Connect->prepare('UPDATE "users" SET read = "off", write = "off", users = "off", tools = "off" ');
         $disUserRes = $disUser->execute();
@@ -123,6 +126,9 @@
                         <form action="?page=users" method="post">
                             <div class="siimple-field">
                                 <button type="submit" class="siimple-btn siimple-btn--primary" value="Update Permissions">Update Permissions</button>
+                                <a href="?page=create-user">
+                                    <div class="siimple-btn siimple-btn--primary siimple--float-right">Create User</div>
+                                </a>
                             </div>
                             <div class="siimple-table siimple-table--striped siimple-table--border siimple-table--hover">
                                 <div class="siimple-table-header">
