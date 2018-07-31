@@ -12,15 +12,19 @@
         # Time stamp
         $ts = time();
 
+        # Microtime to stop Joel
+        $mts = microtime();
+
         # Create a hash
-        $grph = substr(sha1($ts . $grp . $slg), 0, 10);
+        $grph = substr(sha1($mts . $grp . $slg), 0, 10);
 
         # Insert the group
         $stmt = $Connect->prepare('INSERT INTO "groups" ("g_name", "g_slug", "g_hash", "g_owner", "created")
-                    VALUES (:group, "' . $slg . '", "' . $grph . '", "1", "' . $ts . '")');
+                    VALUES (:group, "' . $slg . '", "' . $grph . '", :g_owner, "' . $ts . '")');
 
         # Bind
         $stmt->bindValue(':group', $grp);
+        $stmt->bindValue(':g_owner', $_SESSION['UserID']);
         $stmt->execute();
 
         Viro::LoadPage('content');
