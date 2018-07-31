@@ -10,7 +10,7 @@
         $grp = $_GET['hash'];
 
         # Create a slug
-        $slg = strtolower(str_replace(" ", "-", $_POST['zone']));
+        $slg = Viro::Clean(strtolower(str_replace(" ", "-", $_POST['zone'])));
 
         # Time stamp
         $ts = time();
@@ -26,15 +26,19 @@
 
         # Insert the zone
         $stmt = $Connect->prepare('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "g_hash", "z_owner", "created")
-                    VALUES (:zone, :slug, "' . $zneh . '", "' . $grp . '", "1", "' . $ts . '")');
+                    VALUES (:zone, :slug, "' . $zneh . '", "' . $grp . '", :z_owner, "' . $ts . '")');
         
         $stmt->bindValue(':zone', $zne);
         $stmt->bindValue(':slug', $slg);
+        $stmt->bindValue(':z_owner', $_SESSION['UserID']);
         $stmt->execute();
 
         # Insert the content
-        $Connect->query('INSERT INTO "content" ("content", "c_hash", "z_hash", "g_hash", "created", "edit_by", "updated")
-                    VALUES ("Example content", "' . $conh . '", "' . $zneh . '", "' . $grp . '", "' . $ts . '", "' . $_SESSION['UserID'] . '", "' . $ts . '")');
+        $stmt = $Connect->prepare('INSERT INTO "content" ("content", "c_hash", "z_hash", "g_hash", "created", "edit_by", "updated")
+                    VALUES ("Example content", "' . $conh . '", "' . $zneh . '", "' . $grp . '", "' . $ts . '", :edit_by, "' . $ts . '")');
+
+        $stmt->bindValue(':edit_by', $_SESSION['UserID']);
+        $stmt->execute();
 
         # End the query
         $Connect->exec('COMMIT');

@@ -7,7 +7,7 @@
         $grp = $_POST['group'];
 
         # Create a slug
-        $slg = strtolower(str_replace(" ", "-", $_POST['group']));
+        $slg = Viro::Clean(strtolower(str_replace(" ", "-", $_POST['group'])));
 
         # Time stamp
         $ts = time();
