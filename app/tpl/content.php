@@ -37,8 +37,8 @@
         <div class="siimple-navbar siimple-navbar--extra-large siimple-navbar--dark">
             <div class="siimple-navbar-title">ViroCMS</div>
             <div class="siimple--float-right">
-                <div class="siimple-navbar-item">Profile</div>
-                <div class="siimple-navbar-item">Logout</div>
+                <a href="?page=profile"><div class="siimple-navbar-item">Profile</div></a>
+                <a href="?logout"><div class="siimple-navbar-item">Logout</div></a>
             </div>
         </div>
 
@@ -91,8 +91,10 @@
 
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
-
-                        <a href="?page=create-group"><div class="siimple-btn siimple-btn--primary">Create Group</div></a><br /><br />
+                        
+                        <div class="siimple-field">
+                            <a href="?page=create-group"><div class="siimple-btn siimple-btn--primary">Create Group</div></a>
+                        </div>
                         <div class="siimple-table siimple-table--striped">
                             <div class="siimple-table-header">
                                 <div class="siimple-table-row">

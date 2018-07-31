@@ -10,7 +10,7 @@
         $grp = $_GET['hash'];
 
         # Create a slug
-        $slg = strtolower(str_replace(" ", "-", $_POST['zone']));
+        $slg = Viro::Clean(strtolower(str_replace(" ", "-", $_POST['zone'])));
 
         # Time stamp
         $ts = time();
@@ -24,13 +24,21 @@
         # Begin the query
         $Connect->exec('BEGIN');
 
-        # Insert the group
-        $Connect->query('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "g_hash", "z_owner", "created")
-                    VALUES ("' . $zne . '", "' . $slg . '", "' . $zneh . '", "' . $grp . '", "1", "' . $ts . '")');
+        # Insert the zone
+        $stmt = $Connect->prepare('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "g_hash", "z_owner", "created")
+                    VALUES (:zone, :slug, "' . $zneh . '", "' . $grp . '", :z_owner, "' . $ts . '")');
+        
+        $stmt->bindValue(':zone', $zne);
+        $stmt->bindValue(':slug', $slg);
+        $stmt->bindValue(':z_owner', $_SESSION['UserID']);
+        $stmt->execute();
 
         # Insert the content
-        $Connect->query('INSERT INTO "content" ("content", "c_hash", "z_hash", "g_hash", "created", "edit_by", "updated")
-                    VALUES ("Example content", "' . $conh . '", "' . $zneh . '", "' . $grp . '", "' . $ts . '", "' . $_SESSION['UserID'] . '", "' . $ts . '")');
+        $stmt = $Connect->prepare('INSERT INTO "content" ("content", "c_hash", "z_hash", "g_hash", "created", "edit_by", "updated")
+                    VALUES ("Example content", "' . $conh . '", "' . $zneh . '", "' . $grp . '", "' . $ts . '", :edit_by, "' . $ts . '")');
+
+        $stmt->bindValue(':edit_by', $_SESSION['UserID']);
+        $stmt->execute();
 
         # End the query
         $Connect->exec('COMMIT');
@@ -57,8 +65,8 @@
         <div class="siimple-navbar siimple-navbar--extra-large siimple-navbar--dark">
             <div class="siimple-navbar-title">ViroCMS</div>
             <div class="siimple--float-right">
-                <div class="siimple-navbar-item">Profile</div>
-                <div class="siimple-navbar-item">Logout</div>
+                <a href="?page=profile"><div class="siimple-navbar-item">Profile</div></a>
+                <a href="?logout"><div class="siimple-navbar-item">Logout</div></a>
             </div>
         </div>
 
@@ -116,7 +124,7 @@
                         <form action="?page=create-zone&amp;hash=<?php echo $_GET['hash']; ?>" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Zone name</div>
-                                <input type="text" class="siimple-input siimple-input--fluid" name="zone" placeholder="Example zone">
+                                <input type="text" class="siimple-input" style="width:375px;" name="zone" placeholder="Example zone">
                                 <div class="siimple-field-helper">This field cannot be empty or contain special characters</div>
                             </div>
                             <div class="siimple-field">

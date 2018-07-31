@@ -3,9 +3,16 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    include 'app/viro.app.php';
+    $ViroLang = 'en';
 
-    $vApp = new Viro();
+    include 'app/viro.app.php';
+    //include 'app/lang/' . $ViroLang . '.php';
+
+    # Logout
+    if(Viro::LoggedIn() && isset($_GET['logout'])) {
+        session_destroy();
+        session_start();
+    }
 
     # Simple templating
     if(Viro::LoggedIn()) {

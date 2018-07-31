@@ -3,12 +3,11 @@
     if(!headers_sent()) {
 		session_start();
     }
-    
+
     # ViroCMS Class
     class Viro {
         public static function Connect() {
             $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
-
             return $db;
         }
 
@@ -70,7 +69,16 @@
                 content varchar,
                 a_hash varchar,
                 created varchar,
-                updated varchar
+                updated varchar,
+                published integer
+            )');
+
+            # Backups table
+            $db->query('CREATE TABLE IF NOT EXISTS backups (
+                id integer PRIMARY KEY AUTOINCREMENT,
+                title varchar,
+                author varchar,
+                created varchar
             )');
 
             $db->close();
@@ -122,6 +130,46 @@
             # echo the content
             echo $getContentRes['content'];
         }
+
+        public static function Permission($page) {
+            $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+
+            $usrID = $_SESSION['UserID'];
+
+            # SELECT the user
+            $getUser = $db->prepare('SELECT * FROM "users" WHERE id = :id');
+            $getUser->bindValue(':id', $usrID);
+            $getUserRes = $getUser->execute();
+
+            # Get user
+            $getUserRes = $getUserRes->fetchArray(SQLITE3_ASSOC);
+
+            # Check permission
+            if($getUserRes[$page] == 'on') {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public static function Backup() {
+            return;
+        }
+
+        public static function Restore($id) {
+            return;
+        }
+
+        public static function Translate($string, $lang) {
+            return $lang[$string];
+        }
+
+        public static function Clean($string) {
+            $string = str_replace(' ', '-', $string);
+            $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+         
+            return preg_replace('/-+/', '-', $string);
+         }
 
         public static function LoggedIn() {
             if(!isset($_SESSION['UserID']) || !isset($_SESSION['Username'])) {

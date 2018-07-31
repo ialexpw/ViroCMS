@@ -1,11 +1,3 @@
-<?php
-    $Connect = Viro::Connect();
-
-    # Permissions
-    if(!Viro::Permission('tools')) {
-        Viro::LoadPage('access');
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,7 +5,7 @@
         <meta name="robots" content="index, follow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ViroCMS - Tools</title>
+        <title>ViroCMS - Dashboard</title>
 
         <!-- Styles -->
         <link rel="stylesheet" href="app/tpl/css/siimple.css">
@@ -31,7 +23,7 @@
         </div>
 
         <div class="siimple-jumbotron siimple-jumbotron--extra-large siimple-jumbotron--light">
-            <div class="siimple-jumbotron-title">Tools</div>
+            <div class="siimple-jumbotron-title">Access</div>
             <div class="siimple-jumbotron-detail">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  
             </div>
@@ -74,20 +66,13 @@
                         <!-- Breadcrumb menu -->
                         <div class="siimple-breadcrumb">
                             <div class="siimple-breadcrumb-item">Dashboard</div>
-                            <div class="siimple-breadcrumb-item">Tools</div>
+                            <div class="siimple-breadcrumb-item">Access</div>
                         </div>
 
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
 
-                        <div class="siimple-card" style="max-width:300px;">
-                            <div class="siimple-card-body">
-                                <div class="siimple-card-title">Coming soon</div>
-                                <div class="siimple-card-subtitle">Backup / Restore</div>
-                                Backup and restore configurations easily with the click of a button. Download current and previous versions of your CMS.
-                            </div>
-                        </div>
-                        
+                        <p>Access has been denied to this area.</p>
                     </div>
                 </div>
             </div>
