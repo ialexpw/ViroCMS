@@ -121,6 +121,9 @@
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
                         <form action="?page=users" method="post">
+                            <div class="siimple-field">
+                                <button type="submit" class="siimple-btn siimple-btn--primary" value="Update Permissions">Update Permissions</button>
+                            </div>
                             <div class="siimple-table siimple-table--striped siimple-table--border siimple-table--hover">
                                 <div class="siimple-table-header">
                                     <div class="siimple-table-row">
@@ -191,9 +194,6 @@
                                         }
                                     ?>
                                 </div>
-                            </div>
-                            <div class="siimple-field">
-                                <button type="submit" class="siimple-btn siimple-btn--primary" value="Update Permissions">Update Permissions</button>
                             </div>
                         </form>
                     </div>
