@@ -24,9 +24,13 @@
         # Begin the query
         $Connect->exec('BEGIN');
 
-        # Insert the group
-        $Connect->query('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "g_hash", "z_owner", "created")
-                    VALUES ("' . $zne . '", "' . $slg . '", "' . $zneh . '", "' . $grp . '", "1", "' . $ts . '")');
+        # Insert the zone
+        $stmt = $Connect->prepare('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "g_hash", "z_owner", "created")
+                    VALUES (:zone, :slug, "' . $zneh . '", "' . $grp . '", "1", "' . $ts . '")');
+        
+        $stmt->bindValue(':zone', $zne);
+        $stmt->bindValue(':slug', $slg);
+        $stmt->execute();
 
         # Insert the content
         $Connect->query('INSERT INTO "content" ("content", "c_hash", "z_hash", "g_hash", "created", "edit_by", "updated")
@@ -116,7 +120,7 @@
                         <form action="?page=create-zone&amp;hash=<?php echo $_GET['hash']; ?>" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Zone name</div>
-                                <input type="text" class="siimple-input siimple-input--fluid" name="zone" placeholder="Example zone">
+                                <input type="text" class="siimple-input" style="width:375px;" name="zone" placeholder="Example zone">
                                 <div class="siimple-field-helper">This field cannot be empty or contain special characters</div>
                             </div>
                             <div class="siimple-field">

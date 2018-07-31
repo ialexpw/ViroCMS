@@ -15,15 +15,13 @@
         # Create a hash
         $grph = substr(sha1($ts . $grp . $slg), 0, 10);
 
-        # Begin the query
-        $Connect->exec('BEGIN');
-
         # Insert the group
-        $Connect->query('INSERT INTO "groups" ("g_name", "g_slug", "g_hash", "g_owner", "created")
-                    VALUES ("' . $grp . '", "' . $slg . '", "' . $grph . '", "1", "' . $ts . '")');
+        $stmt = $Connect->prepare('INSERT INTO "groups" ("g_name", "g_slug", "g_hash", "g_owner", "created")
+                    VALUES (:group, "' . $slg . '", "' . $grph . '", "1", "' . $ts . '")');
 
-        # End the query
-        $Connect->exec('COMMIT');
+        # Bind
+        $stmt->bindValue(':group', $grp);
+        $stmt->execute();
 
         Viro::LoadPage('content');
     }
@@ -105,7 +103,7 @@
                         <form action="?page=create-group" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Group name</div>
-                                <input type="text" class="siimple-input siimple-input--fluid" name="group" placeholder="Example group">
+                                <input type="text" class="siimple-input" style="width:375px;" name="group" placeholder="Example group">
                                 <div class="siimple-field-helper">This field cannot be empty or contain special characters</div>
                             </div>
                             <div class="siimple-field">
