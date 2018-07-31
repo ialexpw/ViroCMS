@@ -1,5 +1,5 @@
 # Viro
-ViroCMS is an easy to use PHP CMS which uses SQLite as a back-end. ViroCMS was created to easily integrate into existing websites that have no easy way to edit content with support for both static content and an simplistic, but powerful article/blog engine.
+ViroCMS is an easy to use PHP CMS which uses SQLite as a back-end. ViroCMS was created to easily integrate into existing websites that have no easy way to edit content. With support for both static content and a simplistic, but powerful article/blog engine, ViroCMS makes it easy to control your content.
 
 Some of the main features include;
 * Beautiful interface to the CMS using siimple CSS framework
