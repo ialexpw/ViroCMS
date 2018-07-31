@@ -4,6 +4,11 @@
     text-decoration: inherit;
 }
 
+.siimple-navbar-item a, a:hover, a:active {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 /* Ensure font is the same */
 input, select, textarea, button{
     font-family:inherit;

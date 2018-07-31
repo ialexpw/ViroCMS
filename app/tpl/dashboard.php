@@ -1,10 +1,6 @@
 <?php
     $Connect = Viro::Connect();
 
-    if(isset($_GET['logout'])) {
-        session_destroy();
-    }
-
     # SELECT Groups
     $getGroups = $Connect->prepare('SELECT * FROM "groups"');
     $getGroupsRes = $getGroups->execute();
@@ -28,8 +24,8 @@
         <div class="siimple-navbar siimple-navbar--extra-large siimple-navbar--dark">
             <div class="siimple-navbar-title">ViroCMS</div>
             <div class="siimple--float-right">
-                <div class="siimple-navbar-item">Profile</div>
-                <div class="siimple-navbar-item">Logout</div>
+                <a href="?page=profile"><div class="siimple-navbar-item">Profile</div></a>
+                <a href="?logout"><div class="siimple-navbar-item">Logout</div></a>
             </div>
         </div>
 

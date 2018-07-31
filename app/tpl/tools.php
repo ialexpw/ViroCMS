@@ -1,5 +1,10 @@
 <?php
     $Connect = Viro::Connect();
+
+    # Permissions
+    if(!Viro::Permission('tools')) {
+        Viro::LoadPage('access');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,8 +25,8 @@
         <div class="siimple-navbar siimple-navbar--extra-large siimple-navbar--dark">
             <div class="siimple-navbar-title">ViroCMS</div>
             <div class="siimple--float-right">
-                <div class="siimple-navbar-item">Profile</div>
-                <div class="siimple-navbar-item">Logout</div>
+                <a href="?page=profile"><div class="siimple-navbar-item">Profile</div></a>
+                <a href="?logout"><div class="siimple-navbar-item">Logout</div></a>
             </div>
         </div>
 
@@ -77,9 +82,9 @@
 
                         <div class="siimple-card" style="max-width:300px;">
                             <div class="siimple-card-body">
-                                <div class="siimple-card-title">Special card title</div>
-                                <div class="siimple-card-subtitle">Special card subtitle</div>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                                <div class="siimple-card-title">Coming soon</div>
+                                <div class="siimple-card-subtitle">Backup / Restore</div>
+                                Backup and restore configurations easily with the click of a button. Download current and previous versions of your CMS.
                             </div>
                         </div>
                         

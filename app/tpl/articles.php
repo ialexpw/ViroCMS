@@ -1,9 +1,11 @@
 <?php
     $Connect = Viro::Connect();
 
-    # SELECT Groups
-    $getArticles = $Connect->prepare('SELECT * FROM "groups"');
+    # SELECT Articles
+    $getArticles = $Connect->prepare('SELECT * FROM "articles"');
     $getArticlesRes = $getArticles->execute();
+
+    //$getContentRes = $getContentRes->fetchArray(SQLITE3_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,8 +26,8 @@
         <div class="siimple-navbar siimple-navbar--extra-large siimple-navbar--dark">
             <div class="siimple-navbar-title">ViroCMS</div>
             <div class="siimple--float-right">
-                <div class="siimple-navbar-item">Profile</div>
-                <div class="siimple-navbar-item">Logout</div>
+                <a href="?page=profile"><div class="siimple-navbar-item">Profile</div></a>
+                <a href="?logout"><div class="siimple-navbar-item">Logout</div></a>
             </div>
         </div>
 
@@ -79,11 +81,15 @@
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
 
-                        <div class="siimple-card" style="max-width:300px;">
+                        <div class="siimple-field">
+                            <a href="?page=create-article"><div class="siimple-btn siimple-btn--primary">Create Article</div></a>
+                        </div>
+
+                        <div class="siimple-card" style="max-width:100%;">
                             <div class="siimple-card-body">
-                                <div class="siimple-card-title">Special card title</div>
-                                <div class="siimple-card-subtitle">Special card subtitle</div>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                                <div class="siimple-card-title">Heading of article</div>
+                                <div class="siimple-card-subtitle">Slogan about the article title lorem</div>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
                             </div>
                         </div>
                         
