@@ -1,6 +1,10 @@
 <?php
     $Connect = Viro::Connect();
 
+    if(isset($_GET['logout'])) {
+        session_destroy();
+    }
+
     # SELECT Groups
     $getGroups = $Connect->prepare('SELECT * FROM "groups"');
     $getGroupsRes = $getGroups->execute();
