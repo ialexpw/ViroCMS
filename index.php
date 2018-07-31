@@ -6,7 +6,13 @@
     $ViroLang = 'en';
 
     include 'app/viro.app.php';
-    include 'app/lang/' . $ViroLang . '.php';
+    //include 'app/lang/' . $ViroLang . '.php';
+
+    # Logout
+    if(Viro::LoggedIn() && isset($_GET['logout'])) {
+        session_destroy();
+        session_start();
+    }
 
     # Simple templating
     if(Viro::LoggedIn()) {
