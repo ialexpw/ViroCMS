@@ -123,6 +123,34 @@
             echo $getContentRes['content'];
         }
 
+        public static function Permission($page) {
+            $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+
+            $usrID = $_SESSION['UserID'];
+
+            # SELECT the user
+            $getUser = $db->prepare('SELECT * FROM "users" WHERE id = :id');
+            $getUser->bindValue(':id', $usrID);
+            $getUserRes = $getUser->execute();
+
+            # Get user
+            $getUserRes = $getUserRes->fetchArray(SQLITE3_ASSOC);
+
+            # Check permission
+            if($getUserRes[$page] == 'on') {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public static function Clean($string) {
+            $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+            $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+         
+            return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
+         }
+
         public static function LoggedIn() {
             if(!isset($_SESSION['UserID']) || !isset($_SESSION['Username'])) {
 				return 0;
