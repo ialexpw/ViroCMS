@@ -185,7 +185,7 @@
 
         */
         public static function Translate($string, $lang) {
-            return $lang[$string];
+            echo $lang[$string];
         }
 
         /*
