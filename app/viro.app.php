@@ -6,11 +6,17 @@
 
     # ViroCMS Class
     class Viro {
+        /*
+
+        */
         public static function Connect() {
             $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
             return $db;
         }
 
+        /*
+
+        */
         public static function InstallDatabase() {
             $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 
@@ -84,6 +90,9 @@
             $db->close();
         }
 
+        /*
+
+        */
         public static function GenerateData() {
             $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 
@@ -116,6 +125,9 @@
             $db->close();
         }
 
+        /*
+
+        */
         public static function Content($content) {
             $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 
@@ -131,6 +143,9 @@
             echo $getContentRes['content'];
         }
 
+        /*
+
+        */
         public static function Permission($page) {
             $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 
@@ -152,18 +167,30 @@
             }
         }
 
+        /*
+
+        */
         public static function Backup() {
             return;
         }
 
+        /*
+
+        */
         public static function Restore($id) {
             return;
         }
 
+        /*
+
+        */
         public static function Translate($string, $lang) {
             return $lang[$string];
         }
 
+        /*
+
+        */
         public static function Clean($string) {
             $string = str_replace(' ', '-', $string);
             $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
@@ -171,6 +198,9 @@
             return preg_replace('/-+/', '-', $string);
          }
 
+         /*
+
+        */
         public static function LoggedIn() {
             if(!isset($_SESSION['UserID']) || !isset($_SESSION['Username'])) {
 				return 0;
@@ -179,6 +209,9 @@
 			}
         }
 
+        /*
+
+        */
         public static function LoadView($view) {
             if(file_exists('app/tpl/' . $view . '.php')) {
                 include 'app/tpl/' . $view . '.php';
@@ -187,10 +220,16 @@
             }
         }
 
+        /*
+
+        */
         public static function LoadPage($page) {
             header("Location: ?page=" . $page);
         }
 
+        /*
+
+        */
         public static function Version() {
             return "v0.1-alpha";
         }
