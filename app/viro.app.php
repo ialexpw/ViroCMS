@@ -1,4 +1,16 @@
 <?php
+    /**
+     * viro.app.php
+     *
+     * Main functions file, contains the main Viro class
+     *
+     * @package    ViroCMS
+     * @author     Alex White (https://github.com/ialexpw)
+     * @copyright  2018 ViroCMS
+     * @license    https://github.com/ialexpw/ViroCMS/blob/master/LICENSE  MIT License
+     * @link       https://viro.app
+     */
+
     # Start the session
     if(!headers_sent()) {
 		session_start();
@@ -232,6 +244,25 @@
         */
         public static function Version() {
             return "v0.1-alpha";
+        }
+
+        /*
+
+        */
+        public static function CheckUpdate() {
+            # Get the current version
+            $getVer = file_get_contents('https://viro.app/version.txt');
+
+            # Get our version
+            $locVer = explode('-', Viro::Version());
+            $locVer = str_replace('v', '', $locVer[0]);
+
+            # true = update available
+            if($getVer > $locVer) {
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 ?>
