@@ -3,10 +3,8 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    $ViroLang = 'en';
-
     include 'app/viro.app.php';
-    //include 'app/lang/' . $ViroLang . '.php';
+    include 'app/lang/en.php';
 
     # Logout
     if(Viro::LoggedIn() && isset($_GET['logout'])) {
