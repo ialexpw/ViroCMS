@@ -8,3 +8,4 @@ Some of the main features include;
 * User authentication and capability, control access to individual users
 * Article management, create a blog easily using the built-in tools
 * Backup/restore with a single click inside the interface
+* Easy to translate using a single file
