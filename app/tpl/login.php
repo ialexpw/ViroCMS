@@ -1,4 +1,16 @@
 <?php
+    /**
+     * login.php
+     *
+     * Login form to the CMS
+     *
+     * @package    ViroCMS
+     * @author     Alex White (https://github.com/ialexpw)
+     * @copyright  2018 ViroCMS
+     * @license    https://github.com/ialexpw/ViroCMS/blob/master/LICENSE  MIT License
+     * @link       https://viro.app
+     */
+
     # Logged in? Redirect
     if(Viro::LoggedIn()) {
         Viro::LoadPage('dashboard');

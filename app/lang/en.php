@@ -1,4 +1,17 @@
 <?php
+    /**
+     * en.php
+     *
+     * Translation file, replace the works to the right side of the "=>" text
+     *
+     * @package    ViroCMS
+     * @author     Alex White (https://github.com/ialexpw)
+     * @copyright  2018 ViroCMS
+     * @license    https://github.com/ialexpw/ViroCMS/blob/master/LICENSE  MIT License
+     * @link       https://viro.app
+     */
+
+    # Translations
     $l = array(
         # Menu / titles
         'Profile'   => 'Profile',

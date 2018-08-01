@@ -1,4 +1,16 @@
 <?php
+    /**
+     * content.php
+     *
+     * Listing of the groups
+     *
+     * @package    ViroCMS
+     * @author     Alex White (https://github.com/ialexpw)
+     * @copyright  2018 ViroCMS
+     * @license    https://github.com/ialexpw/ViroCMS/blob/master/LICENSE  MIT License
+     * @link       https://viro.app
+     */
+
     $Connect = Viro::Connect();
 
     # SELECT Groups
