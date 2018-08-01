@@ -10,6 +10,8 @@
      * @license    https://github.com/ialexpw/ViroCMS/blob/master/LICENSE  MIT License
      * @link       https://viro.app
      */
+
+    global $l;
 ?>
 <!DOCTYPE html>
 <html lang="en">

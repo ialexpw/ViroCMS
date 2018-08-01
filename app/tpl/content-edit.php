@@ -11,6 +11,7 @@
      * @link       https://viro.app
      */
     
+    global $l;
     $Connect = Viro::Connect();
 
     # Do we have a group?

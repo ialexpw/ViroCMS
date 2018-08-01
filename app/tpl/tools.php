@@ -11,12 +11,13 @@
      * @link       https://viro.app
      */
 
-    $Connect = Viro::Connect();
-
     # Permissions
     if(!Viro::Permission('tools')) {
         Viro::LoadPage('access');
     }
+
+    global $l;
+    $Connect = Viro::Connect();
 ?>
 <!DOCTYPE html>
 <html lang="en">

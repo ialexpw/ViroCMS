@@ -11,12 +11,13 @@
      * @link       https://viro.app
      */
 
-    $Connect = Viro::Connect();
-
     # Permissions
     if(!Viro::Permission('users')) {
         Viro::LoadPage('access');
     }
+
+    global $l;
+    $Connect = Viro::Connect();
 
     # POSTed form
     if(isset($_POST) && !empty($_POST)) {

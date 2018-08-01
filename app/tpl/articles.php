@@ -11,6 +11,7 @@
      * @link       https://viro.app
      */
 
+    global $l;
     $Connect = Viro::Connect();
 
     # SELECT Articles
@@ -104,7 +105,6 @@
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>

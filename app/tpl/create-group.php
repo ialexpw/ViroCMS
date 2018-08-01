@@ -11,6 +11,7 @@
      * @link       https://viro.app
      */
 
+    global $l;
     $Connect = Viro::Connect();
 
     # POSTing the form

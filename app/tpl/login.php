@@ -16,6 +16,7 @@
         Viro::LoadPage('dashboard');
     }
 
+    global $l;
     $Connect = Viro::Connect();
 
     # POSTing the login form
