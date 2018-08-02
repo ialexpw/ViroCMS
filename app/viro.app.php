@@ -190,6 +190,50 @@
         }
 
         /**
+         * Viro::Article($id)
+         * Select the article based on an index, 1 = latest article
+         */
+        public static function Article($id) {
+            $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+
+            # Offset if ID > 1
+            if($id > 1) {
+                $offset = $id-1;
+            }else{
+                $offset = 0;
+            }
+
+            # SELECT the articles
+            $getArticle = $db->prepare("SELECT * FROM articles ORDER BY id DESC LIMIT 1 OFFSET $offset");
+            $getArticleRes = $getArticle->execute();
+
+            # Get article
+            $getArticleRes = $getArticleRes->fetchArray(SQLITE3_ASSOC);
+
+            # SELECT the author
+            $getUser = $db->prepare('SELECT * FROM users WHERE id = :id');
+            $getUser->bindValue(':id', $getArticleRes['u_id']);
+            $getUserRes = $getUser->execute();
+
+            # Get author
+            $getUserRes = $getUserRes->fetchArray(SQLITE3_ASSOC);
+
+            # Exists
+            if(count($getArticleRes)) {
+                $arArr = array(
+                    'id'        => $getArticleRes['id'],
+                    'title'     => $getArticleRes['title'],
+                    'author'    => $getUserRes['username'],
+                    'content'   => htmlentities($getArticleRes['content']),
+                    'created'   => $getArticleRes['created'],
+                    'updated'   => $getArticleRes['updated']
+                );
+
+                return json_encode($arArr);
+            }
+        }
+
+        /**
          * Viro::Backup()
          * Function to backup the SQLite database
          */
