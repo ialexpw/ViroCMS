@@ -32,12 +32,12 @@
         $grph = substr(sha1($mts . $grp . $slg), 0, 10);
 
         # Insert the group
-        $stmt = $Connect->prepare('INSERT INTO "groups" ("g_name", "g_slug", "g_hash", "g_owner", "created")
-                    VALUES (:group, "' . $slg . '", "' . $grph . '", :g_owner, "' . $ts . '")');
+        $stmt = $Connect->prepare('INSERT INTO "groups" ("g_name", "g_slug", "g_hash", "u_id", "created")
+                    VALUES (:group, "' . $slg . '", "' . $grph . '", :u_id, "' . $ts . '")');
 
         # Bind
         $stmt->bindValue(':group', $grp);
-        $stmt->bindValue(':g_owner', $_SESSION['UserID']);
+        $stmt->bindValue(':u_id', $_SESSION['UserID']);
         $stmt->execute();
 
         Viro::LoadPage('content');
