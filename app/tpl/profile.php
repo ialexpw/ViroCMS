@@ -15,26 +15,30 @@
     $Connect = Viro::Connect();
 
     # POSTing the form
-    if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-        # New user details
-        $usr = $_POST['username'];
-        $eml = $_POST['email'];
-        $psw = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['npassword']) && !empty($_POST['rpassword'])) {
+        # Get the current details
+        $getUser = $Connect->prepare('SELECT * FROM users WHERE id = :id');
+        $getUser->bindValue(':id', $_SESSION['UserID']);
+        $getUserRes = $getUser->execute();
 
-        # Current time
-        $ts = time();
+        # Get user data
+        $getUserRes = $getUserRes->fetchArray(SQLITE3_ASSOC);
 
-        # Insert the user
-        $stmt = $Connect->prepare('INSERT INTO "users" ("username", "email", "password", "read", "write", "users", "tools", "last_login", "active")
-                    VALUES (:username, :email, :password, "on", "off", "off", "off", "0", "' . $ts . '")');
+        # If current password is correct..
+        if(password_verify($_POST['password'], $getUserRes['password']) && $_POST['npassword'] == $_POST['rpassword']) {
+            # Hash new password
+            $nPass = password_hash($_POST['npassword'], PASSWORD_DEFAULT);
 
-        # Bind
-        $stmt->bindValue(':username', $usr);
-        $stmt->bindValue(':email', $eml);
-        $stmt->bindValue(':password', $psw);
-        $stmt->execute();
+            # Update the password field
+            $updateContent = $Connect->prepare('UPDATE users SET password = :password WHERE id = :id');
+            $updateContent->bindValue(':password', $nPass);
+            $updateContent->bindValue(':id', $_SESSION['UserID']);
+            $updateContentRes = $updateContent->execute();
 
-        Viro::LoadPage('users');
+            Viro::LoadPage('profile&success');
+        }else{
+            Viro::LoadPage('profile&error');
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -110,7 +114,7 @@
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
 
-                        <form action="?page=create-user" method="post">
+                        <form action="?page=profile" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Current password</div>
                                 <input type="password" class="siimple-input" style="width:375px;" name="password" placeholder="">
