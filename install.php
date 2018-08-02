@@ -13,8 +13,9 @@
     
     include 'app/viro.app.php';
 
-    $vApp = new Viro();
-
-    Viro::InstallDatabase();
-    Viro::GenerateData();
+    # If not installed
+    if(!Viro::Installed()) {
+        Viro::InstallDatabase();
+        Viro::GenerateData();
+    }
 ?>
