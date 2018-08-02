@@ -219,7 +219,7 @@
             $getUserRes = $getUserRes->fetchArray(SQLITE3_ASSOC);
 
             # Exists
-            if(count($getArticleRes)) {
+            if($getUserRes != false) {
                 $arArr = array(
                     'id'        => $getArticleRes['id'],
                     'title'     => $getArticleRes['title'],
@@ -229,8 +229,14 @@
                     'updated'   => $getArticleRes['updated']
                 );
 
-                return json_encode($arArr);
+                
+            }else{
+                $arArr = array(
+                    'error'     => 'not-found'
+                );
             }
+
+            return json_encode($arArr);
         }
 
         /**
