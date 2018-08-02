@@ -61,7 +61,7 @@
                             </div>
                             <div class="siimple-list-item">
                                 <a href="?page=content">
-                                    <div class="siimple-list-title"><?php Viro::Translate('Content', $l); ?> <div class="siimple--float-right"><i class="far fa-edit"></i></div></div>
+                                    <div class="siimple-list-title"><?php Viro::Translate('Content', $l); ?> <div class="siimple--float-right"><i class="fas fa-align-left"></i></div></div>
                                 </a>
                             </div>
                             <div class="siimple-list-item">
@@ -99,14 +99,42 @@
                             }
                         ?>
 
-                        <div class="siimple-card" style="max-width:300px;">
-                            <div class="siimple-card-body">
-                                <div class="siimple-card-title">Special card title</div>
-                                <div class="siimple-card-subtitle">Special card subtitle</div>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+                        <div class="siimple-grid">
+                            <div class="siimple-grid-row">
+                                <div class="siimple-grid-col siimple-grid-col--4">
+                                    <div class="siimple-card">
+                                        <div class="siimple-card-body" align="center">
+                                            <div class="siimple-card-title"><?php Viro::Translate('Content', $l); ?></div><br />
+                                            <i class="fas fa-align-left fa-7x"></i>
+                                            <div class="siimple-rule"></div>
+                                            <p>Create content Groups and Zones to contain your data for your site and update on the fly.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="siimple-grid-col siimple-grid-col--4">
+                                    <div class="siimple-card">
+                                        <div class="siimple-card-body" align="center">
+                                            <div class="siimple-card-title"><?php Viro::Translate('Articles', $l); ?></div><br />
+                                            <i class="far fa-newspaper fa-7x"></i>
+                                            <div class="siimple-rule"></div>
+                                            <p>Create Articles for your site, whether you are creating a news site or a personal blog.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="siimple-grid-col siimple-grid-col--4">
+                                    <div class="siimple-card">
+                                        <div class="siimple-card-body" align="center">
+                                            <div class="siimple-card-title"><?php Viro::Translate('Users', $l); ?></div><br />
+                                            <i class="far fa-user-circle fa-7x"></i>
+                                            <div class="siimple-rule"></div>
+                                            <p>Create and manage your Users, adjust their permissions with a single click of a button.</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
