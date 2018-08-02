@@ -43,7 +43,7 @@
         <meta name="robots" content="index, follow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ViroCMS - Content</title>
+        <title>ViroCMS - <?php Viro::Translate('ContGrp', $l); ?></title>
 
         <!-- Styles -->
         <link rel="stylesheet" href="app/tpl/css/siimple.css">
@@ -55,15 +55,15 @@
         <div class="siimple-navbar siimple-navbar--extra-large siimple-navbar--dark">
             <div class="siimple-navbar-title">ViroCMS</div>
             <div class="siimple--float-right">
-                <a href="?page=profile"><div class="siimple-navbar-item">Profile</div></a>
-                <a href="?logout"><div class="siimple-navbar-item">Logout</div></a>
+                <a href="?page=profile"><div class="siimple-navbar-item"><?php Viro::Translate('Profile', $l); ?></div></a>
+                <a href="?logout"><div class="siimple-navbar-item"><?php Viro::Translate('Logout', $l); ?></div></a>
             </div>
         </div>
 
         <div class="siimple-jumbotron siimple-jumbotron--extra-large siimple-jumbotron--light">
-            <div class="siimple-jumbotron-title">Content - Groups</div>
+            <div class="siimple-jumbotron-title"><?php Viro::Translate('ContGrp', $l); ?></div>
             <div class="siimple-jumbotron-detail">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  
+                <?php Viro::Translate('ContGrpI', $l); ?>
             </div>
         </div>
 
@@ -103,15 +103,15 @@
                     <div class="siimple-grid-col siimple-grid-col--9">
                         <!-- Breadcrumb menu -->
                         <div class="siimple-breadcrumb">
-                            <div class="siimple-breadcrumb-item">Dashboard</div>
-                            <div class="siimple-breadcrumb-item">Content</div>
+                            <div class="siimple-breadcrumb-item"><?php Viro::Translate('Dashboard', $l); ?></div>
+                            <div class="siimple-breadcrumb-item"><?php Viro::Translate('Content', $l); ?></div>
                         </div>
 
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
                         
                         <div class="siimple-field">
-                            <a href="?page=create-group"><div class="siimple-btn siimple-btn--primary">Create Group</div></a>
+                            <a href="?page=create-group"><div class="siimple-btn siimple-btn--primary"><?php Viro::Translate('CretGrp', $l); ?></div></a>
                         </div>
                         <div class="siimple-table siimple-table--striped">
                             <div class="siimple-table-header">

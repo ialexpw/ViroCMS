@@ -65,7 +65,7 @@
         <meta name="robots" content="index, follow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ViroCMS - Edit Content</title>
+        <title>ViroCMS - <?php Viro::Translate('ContEdt', $l); ?></title>
 
         <!-- Styles -->
         <link rel="stylesheet" href="app/tpl/css/siimple.css">
@@ -82,15 +82,15 @@
         <div class="siimple-navbar siimple-navbar--extra-large siimple-navbar--dark">
             <div class="siimple-navbar-title">ViroCMS</div>
             <div class="siimple--float-right">
-                <a href="?page=profile"><div class="siimple-navbar-item">Profile</div></a>
-                <a href="?logout"><div class="siimple-navbar-item">Logout</div></a>
+                <a href="?page=profile"><div class="siimple-navbar-item"><?php Viro::Translate('Profile', $l); ?></div></a>
+                <a href="?logout"><div class="siimple-navbar-item"><?php Viro::Translate('Logout', $l); ?></div></a>
             </div>
         </div>
 
         <div class="siimple-jumbotron siimple-jumbotron--extra-large siimple-jumbotron--light">
             <div class="siimple-jumbotron-title">Edit zone</div>
             <div class="siimple-jumbotron-detail">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  
+                <?php Viro::Translate('ContEdtI', $l); ?>
             </div>
         </div>
 

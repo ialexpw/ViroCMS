@@ -71,7 +71,7 @@
         <meta name="robots" content="index, follow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ViroCMS - Create Zone</title>
+        <title>ViroCMS - <?php Viro::Translate('CretZne', $l); ?></title>
 
         <!-- Styles -->
         <link rel="stylesheet" href="app/tpl/css/siimple.css">
@@ -83,15 +83,15 @@
         <div class="siimple-navbar siimple-navbar--extra-large siimple-navbar--dark">
             <div class="siimple-navbar-title">ViroCMS</div>
             <div class="siimple--float-right">
-                <a href="?page=profile"><div class="siimple-navbar-item">Profile</div></a>
-                <a href="?logout"><div class="siimple-navbar-item">Logout</div></a>
+                <a href="?page=profile"><div class="siimple-navbar-item"><?php Viro::Translate('Profile', $l); ?></div></a>
+                <a href="?logout"><div class="siimple-navbar-item"><?php Viro::Translate('Logout', $l); ?></div></a>
             </div>
         </div>
 
         <div class="siimple-jumbotron siimple-jumbotron--extra-large siimple-jumbotron--light">
-            <div class="siimple-jumbotron-title">Create zone</div>
+            <div class="siimple-jumbotron-title"><?php Viro::Translate('CretZne', $l); ?></div>
             <div class="siimple-jumbotron-detail">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  
+                <?php Viro::Translate('CretZneI', $l); ?>  
             </div>
         </div>
 
@@ -130,10 +130,10 @@
 
                     <div class="siimple-grid-col siimple-grid-col--9">
                         <div class="siimple-breadcrumb">
-                            <div class="siimple-breadcrumb-item">Dashboard</div>
-                            <div class="siimple-breadcrumb-item">Content</div>
-                            <div class="siimple-breadcrumb-item">Zones</div>
-                            <div class="siimple-breadcrumb-item">Create</div>
+                            <div class="siimple-breadcrumb-item"><?php Viro::Translate('Dashboard', $l); ?></div>
+                            <div class="siimple-breadcrumb-item"><?php Viro::Translate('Content', $l); ?></div>
+                            <div class="siimple-breadcrumb-item"><?php Viro::Translate('Zones', $l); ?></div>
+                            <div class="siimple-breadcrumb-item"><?php Viro::Translate('Create', $l); ?></div>
                         </div>
 
                         <!-- Break line -->
@@ -146,7 +146,7 @@
                                 <div class="siimple-field-helper">This field cannot be empty or contain special characters</div>
                             </div>
                             <div class="siimple-field">
-                                <button type="submit" class="siimple-btn siimple-btn--blue" value="Create zone">Create zone</button>
+                                <button type="submit" class="siimple-btn siimple-btn--blue" value="Create zone"><?php Viro::Translate('CretZne', $l); ?></button>
                             </div>
                         </form>
                     </div>
