@@ -15,23 +15,34 @@
     $Connect = Viro::Connect();
 
     if(!empty($_POST) && !empty($_POST['title']) && !empty($_POST['editor'])) {
+        # Title
+        $arTitle = $_POST['title'];
+
         # Content
-        $cntEdit = $_POST['editor'];
+        $arEdit = $_POST['editor'];
+
+        # Current time
+        $ct = time();
+
+        # Create an article hash
+        $arth = substr(sha1($ct . $arTitle), 0, 10);
+
+        # Article published?
+        if(isset($_POST['publish']) && $_POST['publish'] == 'on') {
+            $pub = 1;
+        }else{
+            $pub = 0;
+        }
 
         # Insert the group
-        $stmt = $Connect->prepare('INSERT INTO "articles" ("title", "author", "content", "a_hash", "created", "updated", "published")
-                    VALUES (:title, ":author", ":content", :g_owner, "' . $ts . '")');
+        $stmt = $Connect->prepare('INSERT INTO "articles" ("title", "u_id", "content", "a_hash", "created", "updated", "published")
+                    VALUES (:title, :u_id, :content, "' . $arth . '", "' . $ct . '", "' . $ct . '", "' . $pub . '")');
 
         # Bind
-        $stmt->bindValue(':group', $grp);
-        $stmt->bindValue(':g_owner', $_SESSION['UserID']);
+        $stmt->bindValue(':title', $arTitle);
+        $stmt->bindValue(':u_id', $_SESSION['UserID']);
+        $stmt->bindValue(':content', $arEdit);
         $stmt->execute();
-
-        # Update the content field
-        $updateContent = $Connect->prepare('UPDATE "content" SET content = :content WHERE z_hash = :z_hash');
-        $updateContent->bindValue(':content', $cntEdit);
-        $updateContent->bindValue(':z_hash', $zneHash);
-        $updateContentRes = $updateContent->execute();
 
         Viro::LoadPage('articles');
     }
@@ -123,12 +134,6 @@
                                 <input onClick="this.select();" type="text" style="width:50%;" class="siimple-input" name="title" value="">
                             </div>
 
-                            <!--<div class="siimple-field">
-                                <div class="siimple-field-label">Article slogan</div>
-                                <input onClick="this.select();" type="text" style="width:50%;" class="siimple-input" name="slogan" value="">
-                                <div class="siimple-field-helper">This field is optional</div>
-                            </div>-->
-
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Article content</div>
                                 <textarea id="virowyg" name="editor"></textarea>
@@ -139,7 +144,7 @@
 
                                 <label class="siimple-label siimple--float-right">Publish 
                                 <div class="siimple-switch">
-                                    <input type="checkbox" id="publish">
+                                    <input type="checkbox" id="publish" name="publish">
                                     <label for="publish"></label>
                                     <div></div>
                                 </div>

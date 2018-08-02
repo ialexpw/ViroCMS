@@ -15,7 +15,7 @@
     $Connect = Viro::Connect();
 
     # SELECT Articles
-    $getArticles = $Connect->prepare('SELECT * FROM "articles"');
+    $getArticles = $Connect->prepare('SELECT * FROM articles ORDER BY id DESC');
     $getArticlesRes = $getArticles->execute();
 ?>
 <!DOCTYPE html>
@@ -100,8 +100,8 @@
                             while($aArticle = $getArticlesRes->fetchArray(SQLITE3_ASSOC)) {
                                 echo '<div class="siimple-card" style="max-width:100%;">';
                                 echo '<div class="siimple-card-body">';
-                                echo '<div class="siimple-card-title">' . $aArticle['title'] . '<a href="?page=articles-edit&hash=' . $aArticle['a_hash'] . '"><i class="fas fa-edit siimple--float-right"></i></a></div>';
-                                echo substr($aArticle['content'], 0, 150) . ' ...';
+                                echo '<div class="siimple-card-title">' . $aArticle['title'] . '</div><span class="siimple--float-right">Edit - Delete</span>';
+                                echo substr(strip_tags($aArticle['content']), 0, 150) . ' ...';
                                 echo '</div>';
                                 echo '</div>';
                             }
