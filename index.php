@@ -18,6 +18,12 @@
     include 'app/viro.app.php';
     include 'app/lang/en.php';
 
+    # Check installation state
+    if(!Viro::Installed()) {
+        echo '<p align="center">Please ensure the app/db folder is writable to the server and you have run the <a href="install.php">installer</a>.</p>';
+        die();
+    }
+
     # Logout
     if(Viro::LoggedIn() && isset($_GET['logout'])) {
         session_destroy();
