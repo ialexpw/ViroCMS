@@ -19,8 +19,8 @@
         # New zone
         $zne = $_POST['zone'];
 
-        # Get the group hash
-        $grp = $_GET['hash'];
+        # Get the group id
+        $grp = $_GET['id'];
 
         # Create a slug
         $slg = Viro::Clean(strtolower(str_replace(" ", "-", $_POST['zone'])));
@@ -38,7 +38,7 @@
         $Connect->exec('BEGIN');
 
         # Insert the zone
-        $stmt = $Connect->prepare('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "g_hash", "z_owner", "created")
+        $stmt = $Connect->prepare('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "g_id", "z_owner", "created")
                     VALUES (:zone, :slug, "' . $zneh . '", "' . $grp . '", :z_owner, "' . $ts . '")');
         
         $stmt->bindValue(':zone', $zne);
@@ -47,8 +47,8 @@
         $stmt->execute();
 
         # Insert the content
-        $stmt = $Connect->prepare('INSERT INTO "content" ("content", "c_hash", "z_hash", "g_hash", "created", "edit_by", "updated")
-                    VALUES ("Example content", "' . $conh . '", "' . $zneh . '", "' . $grp . '", "' . $ts . '", :edit_by, "' . $ts . '")');
+        $stmt = $Connect->prepare('INSERT INTO "content" ("content", "c_hash", "z_id", "edit_by", "created", "updated")
+                    VALUES ("Example content", "' . $conh . '", "' . $grp . '", ":edit_by", "' . $ts . '", "' . $ts . '")');
 
         $stmt->bindValue(':edit_by', $_SESSION['UserID']);
         $stmt->execute();
@@ -56,7 +56,7 @@
         # End the query
         $Connect->exec('COMMIT');
 
-        Viro::LoadPage('content-zones&hash=' . $grp);
+        Viro::LoadPage('content-zones&id=' . $grp);
     }
 ?>
 <!DOCTYPE html>
@@ -134,7 +134,7 @@
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
 
-                        <form action="?page=create-zone&amp;hash=<?php echo $_GET['hash']; ?>" method="post">
+                        <form action="?page=create-zone&amp;hash=<?php echo $grp; ?>" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Zone name</div>
                                 <input type="text" class="siimple-input" style="width:375px;" name="zone" placeholder="Example zone">

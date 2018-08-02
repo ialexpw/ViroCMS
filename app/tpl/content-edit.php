@@ -15,8 +15,8 @@
     $Connect = Viro::Connect();
 
     # Do we have a group?
-    if(isset($_GET['hash']) && !empty($_GET['hash'])) {
-        $zneHash = $_GET['hash'];
+    if(isset($_GET['id']) && !empty($_GET['id'])) {
+        $zneId = $_GET['id'];
     }else{
         Viro::LoadPage('content');
     }
@@ -30,15 +30,17 @@
         }
     
         # Update the content field
-        $updateContent = $Connect->prepare('UPDATE "content" SET content = :content WHERE z_hash = :z_hash');
+        $updateContent = $Connect->prepare('UPDATE "content" SET content = :content WHERE z_id = :z_id');
         $updateContent->bindValue(':content', $cntEdit);
-        $updateContent->bindValue(':z_hash', $zneHash);
+        $updateContent->bindValue(':z_id', $zneId);
         $updateContentRes = $updateContent->execute();
+
+        Viro::LoadPage('content-edit&id=' . $zneId);
     }
 
     # SELECT Content
-    $getContent = $Connect->prepare('SELECT * FROM "content" WHERE z_hash = :z_hash');
-    $getContent->bindValue(':z_hash', $zneHash);
+    $getContent = $Connect->prepare('SELECT * FROM content WHERE z_id = :z_id');
+    $getContent->bindValue(':z_id', $zneId);
     $getContentRes = $getContent->execute();
 
     # Get the data
@@ -132,7 +134,7 @@
                         <div class="siimple-rule"></div>
 
                         <!-- WYSIWYG -->
-                        <form action="?page=content-edit&amp;hash=<?php echo $_GET['hash']; ?>" method="post">
+                        <form action="?page=content-edit&amp;id=<?php echo $zneId; ?>" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Website integration</div>
                                 <input onClick="this.select();" type="text" style="width:50%;" class="siimple-input" name="website" value="<?php echo $pstData; ?>" readonly>

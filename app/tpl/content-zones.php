@@ -15,33 +15,33 @@
     $Connect = Viro::Connect();
 
     # Do we have a group?
-    if(isset($_GET['hash']) && !empty($_GET['hash'])) {
-        $grpHash = $_GET['hash'];
+    if(isset($_GET['id']) && !empty($_GET['id'])) {
+        $grpId = $_GET['id'];
     }else{
         Viro::LoadPage('content');
     }
 
     # SELECT Zones
-    $getZones = $Connect->prepare('SELECT * FROM "zones" WHERE g_hash = :g_hash');
-    $getZones->bindValue(':g_hash', $grpHash);
+    $getZones = $Connect->prepare('SELECT * FROM zones WHERE id = :id');
+    $getZones->bindValue(':id', $grpId);
     $getZonesRes = $getZones->execute();
 
     # Deleting a zone
     if(isset($_GET['del']) && !empty($_GET['del'])) {
         # Zone hash
-        $rmHash = $_GET['del'];
+        $rmId = $_GET['del'];
 
         # Remove the zone
-        $rmZne = $Connect->prepare('DELETE FROM "zones" WHERE z_hash = :z_hash');
-        $rmZne->bindValue(':z_hash', $rmHash);
+        $rmZne = $Connect->prepare('DELETE FROM "zones" WHERE id = :id');
+        $rmZne->bindValue(':id', $rmId);
         $rmZne->execute();
 
         # Remove the content
-        $rmZne = $Connect->prepare('DELETE FROM "content" WHERE z_hash = :z_hash');
-        $rmZne->bindValue(':z_hash', $rmHash);
+        $rmZne = $Connect->prepare('DELETE FROM "content" WHERE z_id = :z_id');
+        $rmZne->bindValue(':z_id', $rmId);
         $rmZne->execute();
 
-        Viro::LoadPage('content-zones&hash=' . $grpHash);
+        Viro::LoadPage('content-zones&id=' . $grpId);
     }
 ?>
 <!DOCTYPE html>
@@ -145,7 +145,7 @@
                                         echo '<div class="siimple-table-cell">' . $aZone['z_name'] . '</div>';
                                         echo '<div class="siimple-table-cell">' . $aZone['z_slug'] . '</div>';
                                         echo '<div class="siimple-table-cell">' . $getOwnerRes['username'] . '</div>';
-                                        echo '<div class="siimple-table-cell"><a href="?page=content-edit&hash=' . $aZone['z_hash'] . '">Edit</a> | <a href="?page=content-zones&hash=' . $_GET['hash'] . '&del=' . $aZone['z_hash'] . '">Delete</a></div>';
+                                        echo '<div class="siimple-table-cell"><a href="?page=content-edit&id=' . $aZone['id'] . '">Edit</a> | <a href="?page=content-zones&id=' . $aZone['id'] . '&del=' . $aZone['id'] . '">Delete</a></div>';
                                         echo '</div>';
                                     }
                                 ?>

@@ -21,11 +21,11 @@
     # Deleting a group
     if(isset($_GET['del']) && !empty($_GET['del'])) {
         # Group hash
-        $rmHash = $_GET['del'];
+        $rmId = $_GET['del'];
 
         # Remove the group
-        $rmGrp = $Connect->prepare('DELETE FROM "groups" WHERE g_hash = :g_hash');
-        $rmGrp->bindValue(':g_hash', $rmHash);
+        $rmGrp = $Connect->prepare('DELETE FROM "groups" WHERE id = :id');
+        $rmGrp->bindValue(':id', $rmId);
         $rmGrp->execute();
 
         Viro::LoadPage('content');
@@ -119,10 +119,10 @@
                             </div>
                             <div class="siimple-table-body">
                                 <?php
-                                    while($aGroup = $getGroupsRes->fetchArray(SQLITE3_ASSOC)){
+                                    while($aGroup = $getGroupsRes->fetchArray(SQLITE3_ASSOC)) {
                                         # Lookup the owner
-                                        $getGroupOwner = $Connect->prepare('SELECT * FROM "users" WHERE id = :userid LIMIT 1');
-                                        $getGroupOwner->bindValue(':userid', $aGroup['g_owner']);
+                                        $getGroupOwner = $Connect->prepare('SELECT * FROM "users" WHERE id = :id LIMIT 1');
+                                        $getGroupOwner->bindValue(':id', $aGroup['u_id']);
                                         $getOwnerRes = $getGroupOwner->execute();
 
                                         # Fetch the array
@@ -132,7 +132,7 @@
                                         echo '<div class="siimple-table-cell">' . $aGroup['g_name'] . '</div>';
                                         echo '<div class="siimple-table-cell">' . $aGroup['g_slug'] . '</div>';
                                         echo '<div class="siimple-table-cell">' . $getOwnerRes['username'] . '</div>';
-                                        echo '<div class="siimple-table-cell"><a href="?page=content-zones&hash=' . $aGroup['g_hash'] . '">View Zones</a> | <a href="?page=content&del=' . $aGroup['g_hash'] . '">Delete</a></div>';
+                                        echo '<div class="siimple-table-cell"><a href="?page=content-zones&id=' . $aGroup['id'] . '">View Zones</a> | <a href="?page=content&del=' . $aGroup['id'] . '">Delete</a></div>';
                                         echo '</div>';
                                     }
                                 ?>
