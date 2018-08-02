@@ -228,8 +228,6 @@
                     'created'   => $getArticleRes['created'],
                     'updated'   => $getArticleRes['updated']
                 );
-
-                
             }else{
                 $arArr = array(
                     'error'     => 'not-found'
