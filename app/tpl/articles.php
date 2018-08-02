@@ -100,9 +100,10 @@
                             while($aArticle = $getArticlesRes->fetchArray(SQLITE3_ASSOC)) {
                                 echo '<div class="siimple-card" style="max-width:100%;">';
                                 echo '<div class="siimple-card-body">';
-                                echo '<div class="siimple-card-title">' . $aArticle['title'] . '</div><span class="siimple--float-right">Edit - Delete</span>';
-                                echo substr(strip_tags($aArticle['content']), 0, 150) . ' ...';
-                                echo '</div>';
+                                echo '<div class="siimple-card-title">' . $aArticle['title'] . '</div>';
+                                echo '<p style="max-width:85%;">' . substr(strip_tags($aArticle['content']), 0, 150) . ' ...</p>';
+                                echo '<span class="siimple--float-right">Edit - Delete</span>';
+                                echo '<br /></div>';
                                 echo '</div>';
                             }
                         ?>
