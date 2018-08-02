@@ -32,6 +32,74 @@
         public static function InstallDatabase() {
             $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 
+            $db->query('CREATE TABLE users (
+                id integer PRIMARY KEY AUTOINCREMENT,
+                username varchar,
+                email varchar,
+                password varchar,
+                read varchar,
+                write varchar,
+                users varchar,
+                tools varchar,
+                last_login varchar,
+                active integer
+            )');
+            
+            $db->query('CREATE TABLE groups (
+                id integer PRIMARY KEY AUTOINCREMENT,
+                g_name varchar,
+                g_slug varchar,
+                g_hash varchar,
+                u_id integer,
+                created varchar,
+                FOREIGN KEY(u_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
+            )');
+            
+            $db->query('CREATE TABLE zones (
+                id integer PRIMARY KEY AUTOINCREMENT,
+                z_name varchar,
+                z_slug varchar,
+                z_hash varchar,
+                g_id integer,
+                z_owner integer,
+                created varchar,
+                FOREIGN KEY(g_id) REFERENCES groups(id) ON UPDATE CASCADE ON DELETE CASCADE
+            )');
+            
+            $db->query('CREATE TABLE content (
+                id integer PRIMARY KEY AUTOINCREMENT,
+                content varchar,
+                c_hash varchar,
+                z_id integer,
+                edit_by integer,
+                created varchar,
+                updated varchar,
+                FOREIGN KEY(z_id) REFERENCES zones(id) ON UPDATE CASCADE ON DELETE CASCADE
+            )');
+            
+            $db->query('CREATE TABLE articles (
+                id integer PRIMARY KEY AUTOINCREMENT,
+                title varchar,
+                u_id integer,
+                content varchar,
+                a_hash varchar,
+                created varchar,
+                updated varchar,
+                published integer,
+                FOREIGN KEY(u_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
+            )');
+            
+            $db->query('CREATE TABLE backups (
+                id integer PRIMARY KEY AUTOINCREMENT,
+                title varchar,
+                u_id integer,
+                created varchar,
+                FOREIGN KEY(u_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
+            )');
+
+
+
+/*
             # Users table
             $db->query('CREATE TABLE IF NOT EXISTS users (
                 id integer PRIMARY KEY AUTOINCREMENT,
@@ -63,7 +131,7 @@
                 z_slug varchar,
                 z_hash varchar,
                 g_hash varchar,
-                z_owner varchar,
+                z_owner integer,
                 created varchar
             )');
 
@@ -83,7 +151,7 @@
             $db->query('CREATE TABLE IF NOT EXISTS articles (
                 id integer PRIMARY KEY AUTOINCREMENT,
                 title varchar,
-                author varchar,
+                author integer,
                 content varchar,
                 a_hash varchar,
                 created varchar,
@@ -95,9 +163,10 @@
             $db->query('CREATE TABLE IF NOT EXISTS backups (
                 id integer PRIMARY KEY AUTOINCREMENT,
                 title varchar,
-                author varchar,
+                author integer,
                 created varchar
             )');
+*/
 
             $db->close();
         }
@@ -110,8 +179,34 @@
 
             $db->exec('BEGIN');
 
+            # Generate default password hash
             $adUser = password_hash("password", PASSWORD_DEFAULT);
 
+            # Get current time
+            $ct = time();
+
+            # Admin user
+            $db->query('INSERT INTO "users" ("username", "email", "password", "read", "write", "users", "tools", "last_login", "active")
+                        VALUES ("admin", "cms@viro.app", "' . $adUser . '", "on", "on", "on", "on", "0", "1")');
+
+            # Generated group
+            $db->query('INSERT INTO "groups" ("g_name", "g_slug", "g_hash", "u_id", "created")
+                        VALUES ("Main Group", "main-group", "grphash", "1", "' . $ct . '")');
+
+            # Generated zone
+            $db->query('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "g_id", "z_owner", "created")
+                        VALUES ("Header Zone", "header-zone", "znehash", "1", "1", "' . $ct . '")');
+
+            # Generated content
+            $db->query('INSERT INTO "content" ("content", "c_hash", "z_id", "edit_by", "created", "updated")
+                        VALUES ("Test Content", "conhash", "1", "1", "' . $ct . '", "' . $ct . '")');
+
+            # Generated articles
+            $db->query('INSERT INTO "articles" ("title", "u_id", "content", "a_hash", "created", "updated", "published")
+                        VALUES ("Article title", "1", "Example article content.", "arthash", "' . $ct . '", "' . $ct . '", "0")');
+
+
+/*
             # Admin user
             $db->query('INSERT INTO "users" ("username", "email", "password", "read", "write", "users", "tools", "last_login", "active")
                         VALUES ("admin", "cms@viro.app", "' . $adUser . '", "on", "on", "on", "on", "0", "1")');
@@ -130,7 +225,8 @@
 
             # Generated articles
             $db->query('INSERT INTO "articles" ("title", "author", "content", "a_hash", "created", "updated")
-                        VALUES ("Test Title", "1", "Test content here", "cnhash", "0", "0")');
+                        VALUES ("Test Title", "1", "Test content here", "arthash", "0", "0")');
+*/
 
             $db->exec('COMMIT');
 
