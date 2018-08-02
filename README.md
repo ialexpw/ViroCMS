@@ -19,3 +19,4 @@ ViroCMS is an easy to use PHP CMS which uses SQLite as a back-end. ViroCMS was c
 Ensure to add a new user once logged in for the first time and disable access for the admin user.
 
 ## Screenshots
+![ViroCMS Dashboard](https://viro.app/Viro.png)
