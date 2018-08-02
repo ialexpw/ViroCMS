@@ -26,6 +26,7 @@
         Viro::LoadPage('content');
     }
 
+    # POSTing content
     if(!empty($_POST)) {
         # Content
         if(empty($_POST['editor'])) {
@@ -100,27 +101,27 @@
                         <div class="siimple-list siimple-list--hover">
                             <div class="siimple-list-item">
                                 <a href="?page=dashboard">
-                                    <div class="siimple-list-title">Dashboard <div class="siimple--float-right"><i class="fas fa-home"></i></div></div>
+                                    <div class="siimple-list-title"><?php Viro::Translate('Dashboard', $l); ?> <div class="siimple--float-right"><i class="fas fa-home"></i></div></div>
                                 </a>
                             </div>
                             <div class="siimple-list-item">
                                 <a href="?page=content">
-                                    <div class="siimple-list-title">Content <div class="siimple--float-right"><i class="far fa-edit"></i></div></div>
+                                    <div class="siimple-list-title"><?php Viro::Translate('Content', $l); ?> <div class="siimple--float-right"><i class="fas fa-align-left"></i></div></div>
                                 </a>
                             </div>
                             <div class="siimple-list-item">
                                 <a href="?page=articles">
-                                    <div class="siimple-list-title">Articles <div class="siimple--float-right"><i class="far fa-newspaper"></i></div></div>
+                                    <div class="siimple-list-title"><?php Viro::Translate('Articles', $l); ?> <div class="siimple--float-right"><i class="far fa-newspaper"></i></div></div>
                                 </a>
                             </div>
                             <div class="siimple-list-item">
                                 <a href="?page=users">
-                                    <div class="siimple-list-title">User management <div class="siimple--float-right"><i class="far fa-user-circle"></i></div></div>
+                                    <div class="siimple-list-title"><?php Viro::Translate('UserMgn', $l); ?> <div class="siimple--float-right"><i class="far fa-user-circle"></i></div></div>
                                 </a>
                             </div>
                             <div class="siimple-list-item">
                                 <a href="?page=tools">
-                                    <div class="siimple-list-title">Backup &amp; restore <div class="siimple--float-right"><i class="fas fa-sync-alt"></i></div></div>
+                                    <div class="siimple-list-title"><?php Viro::Translate('Backup', $l); ?> <div class="siimple--float-right"><i class="fas fa-sync-alt"></i></div></div>
                                 </a>
                             </div>
                         </div>
@@ -129,10 +130,10 @@
                     <div class="siimple-grid-col siimple-grid-col--9">
                         <!-- Breadcrumb menu -->
                         <div class="siimple-breadcrumb">
-                        <div class="siimple-breadcrumb-item">Dashboard</div>
-                            <div class="siimple-breadcrumb-item">Content</div>
-                            <div class="siimple-breadcrumb-item">Zones</div>
-                            <div class="siimple-breadcrumb-item">Edit</div>
+                        <div class="siimple-breadcrumb-item"><?php Viro::Translate('Dashboard', $l); ?></div>
+                            <div class="siimple-breadcrumb-item"><?php Viro::Translate('Content', $l); ?></div>
+                            <div class="siimple-breadcrumb-item"><?php Viro::Translate('Zones', $l); ?></div>
+                            <div class="siimple-breadcrumb-item"><?php Viro::Translate('Edit', $l); ?></div>
                         </div>
 
                         <!-- Break line -->

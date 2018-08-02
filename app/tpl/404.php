@@ -56,7 +56,7 @@
                             </div>
                             <div class="siimple-list-item">
                                 <a href="?page=content">
-                                    <div class="siimple-list-title"><?php Viro::Translate('Content', $l); ?> <div class="siimple--float-right"><i class="far fa-edit"></i></div></div>
+                                    <div class="siimple-list-title"><?php Viro::Translate('Content', $l); ?> <div class="siimple--float-right"><i class="fas fa-align-left"></i></div></div>
                                 </a>
                             </div>
                             <div class="siimple-list-item">
@@ -87,7 +87,7 @@
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
 
-                        <p>Access has been denied to this area.</p>
+                        <p><?php Viro::Translate('404Text', $l); ?></p>
                     </div>
                 </div>
             </div>

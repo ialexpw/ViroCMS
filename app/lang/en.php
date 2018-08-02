@@ -2,7 +2,7 @@
     /**
      * en.php
      *
-     * Translation file, replace the works to the right side of the "=>" text
+     * Translation file, replace the text to the right side of the "=>"
      *
      * @package    ViroCMS
      * @author     Alex White (https://github.com/ialexpw)
@@ -11,9 +11,14 @@
      * @link       https://viro.app
      */
 
-    # Translations
+    /**
+     * Translations
+     */
     $l = array(
-        # Menu / titles
+        /**
+         * Menu / titles
+         */
+        '404'       => '404',
         'Profile'   => 'Profile',
         'Logout'    => 'Logout',
         'Access'    => 'Access',
@@ -23,7 +28,10 @@
         'Backup'    => 'Backup &amp; restore',
         'Dashboard' => 'Dashboard',
         'Articles'  => 'Articles',
+        'Edit'      => 'Edit',
+        'Delete'    => 'Delete',
         'ContGrp'   => 'Content - Groups',
+        'Create'    => 'Create',
         'CretGrp'   => 'Create group',
         'ContZne'   => 'Content - Zones',
         'CretZne'   => 'Create zone',
@@ -32,7 +40,9 @@
         'Tools'     => 'Tools',
         'Users'     => 'Users',
 
-        # Page information lines
+        /**
+         * Page information lines
+         */
         'DashI'     => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         'ArtcI'     => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         'AccsI'     => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -48,10 +58,20 @@
         'CretZneI'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         'CretUsrI'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 
-        # Page text
-        '' => '',
-        '' => '',
-        '' => '',
+        /**
+         * Page text
+         */
+
+        # 404.php
+        '404Text'   => 'We can not find the page you were looking for!',
+
+        # access.php
+        'AccText'   => 'Access has been denied to this area.',
+
+        # articles.php
+        'CreArt'    => 'Create article',
+
+        # users.php
         '' => '',
         '' => '',
     );
