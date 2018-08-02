@@ -19,6 +19,19 @@
     global $l;
     $Connect = Viro::Connect();
 
+    # Deleting an article
+    if(isset($_GET['del']) && !empty($_GET['del'])) {
+        # Article id
+        $rmId = $_GET['del'];
+
+        # Remove the group
+        $rmGrp = $Connect->prepare('DELETE FROM articles WHERE id = :id');
+        $rmGrp->bindValue(':id', $rmId);
+        $rmGrp->execute();
+
+        Viro::LoadPage('articles');
+    }
+
     # SELECT Articles
     $getArticles = $Connect->prepare('SELECT * FROM articles ORDER BY id DESC');
     $getArticlesRes = $getArticles->execute();
@@ -107,7 +120,7 @@
                                 echo '<div class="siimple-card-body">';
                                 echo '<div class="siimple-card-title">' . $aArticle['title'] . '</div>';
                                 echo '<p style="max-width:85%;">' . substr(strip_tags($aArticle['content']), 0, 150) . ' ...</p>';
-                                echo '<span class="siimple--float-right"><a href="">Edit</a> - <a href="">Delete</a></span>';
+                                echo '<span class="siimple--float-right"><a href="?page=articles&del=' . $aArticle['id'] . '">Delete</a></span>';
                                 echo '<br /></div>';
                                 echo '</div>';
                             }
