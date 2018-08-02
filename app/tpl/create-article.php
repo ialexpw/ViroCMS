@@ -14,15 +14,26 @@
     global $l;
     $Connect = Viro::Connect();
 
-    if(!empty($_POST) && !empty($_POST['editor'])) {
+    if(!empty($_POST) && !empty($_POST['title']) && !empty($_POST['editor'])) {
         # Content
         $cntEdit = $_POST['editor'];
+
+        # Insert the group
+        $stmt = $Connect->prepare('INSERT INTO "articles" ("title", "author", "content", "a_hash", "created", "updated", "published")
+                    VALUES (:title, ":author", ":content", :g_owner, "' . $ts . '")');
+
+        # Bind
+        $stmt->bindValue(':group', $grp);
+        $stmt->bindValue(':g_owner', $_SESSION['UserID']);
+        $stmt->execute();
 
         # Update the content field
         $updateContent = $Connect->prepare('UPDATE "content" SET content = :content WHERE z_hash = :z_hash');
         $updateContent->bindValue(':content', $cntEdit);
         $updateContent->bindValue(':z_hash', $zneHash);
         $updateContentRes = $updateContent->execute();
+
+        Viro::LoadPage('articles');
     }
 ?>
 <!DOCTYPE html>
@@ -112,11 +123,11 @@
                                 <input onClick="this.select();" type="text" style="width:50%;" class="siimple-input" name="title" value="">
                             </div>
 
-                            <div class="siimple-field">
+                            <!--<div class="siimple-field">
                                 <div class="siimple-field-label">Article slogan</div>
                                 <input onClick="this.select();" type="text" style="width:50%;" class="siimple-input" name="slogan" value="">
                                 <div class="siimple-field-helper">This field is optional</div>
-                            </div>
+                            </div>-->
 
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Article content</div>
