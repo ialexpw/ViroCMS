@@ -17,8 +17,6 @@
     # SELECT Articles
     $getArticles = $Connect->prepare('SELECT * FROM "articles"');
     $getArticlesRes = $getArticles->execute();
-
-    //$getContentRes = $getContentRes->fetchArray(SQLITE3_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,13 +96,16 @@
                             <a href="?page=create-article"><div class="siimple-btn siimple-btn--primary">Create Article</div></a>
                         </div>
 
-                        <div class="siimple-card" style="max-width:100%;">
-                            <div class="siimple-card-body">
-                                <div class="siimple-card-title">Heading of article</div>
-                                <div class="siimple-card-subtitle">Slogan about the article title lorem</div>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                            </div>
-                        </div>
+                        <?php
+                            while($aArticle = $getArticlesRes->fetchArray(SQLITE3_ASSOC)) {
+                                echo '<div class="siimple-card" style="max-width:100%;">';
+                                echo '<div class="siimple-card-body">';
+                                echo '<div class="siimple-card-title">' . $aArticle['title'] . '<a href="?page=articles-edit&hash=' . $aArticle['a_hash'] . '"><i class="fas fa-edit siimple--float-right"></i></a></div>';
+                                echo substr($aArticle['content'], 0, 150) . ' ...';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
