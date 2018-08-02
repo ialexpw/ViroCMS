@@ -254,7 +254,11 @@
          * Taking in the string to translate and the language file, this will replace $string with the translation
          */
         public static function Translate($string, $lang) {
-            echo $lang[$string];
+            if(!empty($lang[$string])) {
+                echo $lang[$string];
+            }else{
+                echo 'TRANSLATION-ERROR';
+            }
         }
 
         /**
