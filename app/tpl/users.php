@@ -57,6 +57,8 @@
                 $updUserRes = $updUser->execute();
             }
         }
+
+        Viro::LoadPage('users');
     }
 
     # SELECT Users
