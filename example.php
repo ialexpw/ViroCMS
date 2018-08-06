@@ -2,7 +2,7 @@
     /**
      * example.php
      *
-     * Example file to show how Articles are used
+     * Example file to show ViroCMS can be used
      *
      * @package    ViroCMS
      * @author     Alex White (https://github.com/ialexpw)
@@ -16,4 +16,14 @@
      * Will return the latest article in JSON format
      */
     echo Viro::Article(1);
+
+    /**
+     * Will override the default entry, below will return the article with ID 2 in JSON format
+     */
+    echo Viro::Article(2, 1);
+
+    /**
+     * Create a backup of the SQLite database
+     */
+    Viro::Backup();
 ?>

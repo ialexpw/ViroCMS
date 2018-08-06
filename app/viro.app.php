@@ -121,23 +121,23 @@
             $ct = time();
 
             # Admin user
-            $db->query('INSERT INTO "users" ("username", "email", "password", "read", "write", "users", "tools", "last_login", "active")
+            $db->query('INSERT INTO users ("username", "email", "password", "read", "write", "users", "tools", "last_login", "active")
                         VALUES ("admin", "cms@viro.app", "' . $adUser . '", "on", "on", "on", "on", "0", "1")');
 
             # Generated group
-            $db->query('INSERT INTO "groups" ("g_name", "g_slug", "g_hash", "u_id", "created")
+            $db->query('INSERT INTO groups ("g_name", "g_slug", "g_hash", "u_id", "created")
                         VALUES ("Main Group", "main-group", "grphash", "1", "' . $ct . '")');
 
             # Generated zone
-            $db->query('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "g_id", "z_owner", "created")
+            $db->query('INSERT INTO zones ("z_name", "z_slug", "z_hash", "g_id", "z_owner", "created")
                         VALUES ("Header Zone", "header-zone", "znehash", "1", "1", "' . $ct . '")');
 
             # Generated content
-            $db->query('INSERT INTO "content" ("content", "c_hash", "z_id", "edit_by", "created", "updated")
+            $db->query('INSERT INTO content ("content", "c_hash", "z_id", "edit_by", "created", "updated")
                         VALUES ("Test Content", "conhash", "1", "1", "' . $ct . '", "' . $ct . '")');
 
             # Generated articles
-            $db->query('INSERT INTO "articles" ("title", "u_id", "content", "a_hash", "created", "updated", "published")
+            $db->query('INSERT INTO articles ("title", "u_id", "content", "a_hash", "created", "updated", "published")
                         VALUES ("Article title", "1", "Example article content.", "arthash", "' . $ct . '", "' . $ct . '", "0")');
 
             $db->exec('COMMIT');
@@ -155,7 +155,7 @@
             $usrID = $_SESSION['UserID'];
 
             # SELECT the user
-            $getUser = $db->prepare('SELECT * FROM "users" WHERE id = :id');
+            $getUser = $db->prepare('SELECT * FROM users WHERE id = :id');
             $getUser->bindValue(':id', $usrID);
             $getUserRes = $getUser->execute();
 
@@ -178,7 +178,7 @@
             $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 
             # SELECT the content
-            $getContent = $db->prepare('SELECT * FROM "content" WHERE c_hash = :c_hash');
+            $getContent = $db->prepare('SELECT * FROM content WHERE c_hash = :c_hash');
             $getContent->bindValue(':c_hash', $content);
             $getContentRes = $getContent->execute();
 
@@ -193,7 +193,7 @@
          * Viro::Article($id)
          * Select the article based on an index, 1 = latest article
          */
-        public static function Article($id) {
+        public static function Article($id, $override = 0) {
             $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 
             # Offset if ID > 1
@@ -203,8 +203,13 @@
                 $offset = 0;
             }
 
-            # SELECT the articles
-            $getArticle = $db->prepare("SELECT * FROM articles ORDER BY id DESC LIMIT 1 OFFSET $offset");
+            # SELECT the articles - if override, SELECT the ID
+            if($override > 0) {
+                $getArticle = $db->prepare("SELECT * FROM articles WHERE id = :id");
+                $getArticle->bindValue(':id', $id);
+            }else{
+                $getArticle = $db->prepare("SELECT * FROM articles ORDER BY id DESC LIMIT 1 OFFSET $offset");
+            }
             $getArticleRes = $getArticle->execute();
 
             # Get article
@@ -242,7 +247,33 @@
          * Function to backup the SQLite database
          */
         public static function Backup() {
-            return;
+            $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+
+            # Current time
+            $ct = time();
+
+            # Get user ID
+            if(isset($_SESSION['UserID'])) {
+                $usrID = $_SESSION['UserID'];
+            }else{
+                $usrID = 0;
+            }
+
+            # Create the directory
+            if(!mkdir("app/db/backup/$ct", 0777, true)) {
+                return false;
+            }
+
+            # Copy the file
+            if(copy("app/db/viro.db", "app/db/backup/$ct/viro.db")) {
+                # Insert backup
+                $db->query('INSERT INTO backups ("title", "u_id", "created")
+                            VALUES ("Viro_' . $ct . '", "' . $usrID . '", "' . $ct . '")');
+
+                return true;
+            }else{
+                return false;
+            }
         }
 
         /**
