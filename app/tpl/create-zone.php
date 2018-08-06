@@ -43,7 +43,7 @@
         $Connect->exec('BEGIN');
 
         # Insert the zone
-        $stmt = $Connect->prepare('INSERT INTO "zones" ("z_name", "z_slug", "z_hash", "g_id", "z_owner", "created")
+        $stmt = $Connect->prepare('INSERT INTO zones ("z_name", "z_slug", "z_hash", "g_id", "z_owner", "created")
                     VALUES (:zone, :slug, "' . $zneh . '", "' . $grp . '", :z_owner, "' . $ts . '")');
         
         $stmt->bindValue(':zone', $zne);
@@ -51,9 +51,11 @@
         $stmt->bindValue(':z_owner', $_SESSION['UserID']);
         $stmt->execute();
 
+        $nZone = $Connect->lastInsertRowID();
+
         # Insert the content
-        $stmt = $Connect->prepare('INSERT INTO "content" ("content", "c_hash", "z_id", "edit_by", "created", "updated")
-                    VALUES ("Example content", "' . $conh . '", "' . $grp . '", ":edit_by", "' . $ts . '", "' . $ts . '")');
+        $stmt = $Connect->prepare('INSERT INTO content ("content", "c_hash", "z_id", "edit_by", "created", "updated")
+                    VALUES ("Example content", "' . $conh . '", "' . $nZone . '", :edit_by, "' . $ts . '", "' . $ts . '")');
 
         $stmt->bindValue(':edit_by', $_SESSION['UserID']);
         $stmt->execute();
@@ -139,7 +141,7 @@
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
 
-                        <form action="?page=create-zone&amp;id=<?php echo $grp; ?>" method="post">
+                        <form action="?page=create-zone&amp;id=<?php echo $_GET['id']; ?>" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Zone name</div>
                                 <input type="text" class="siimple-input" style="width:375px;" name="zone" placeholder="Example zone">

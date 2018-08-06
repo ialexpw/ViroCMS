@@ -19,7 +19,7 @@
     global $l;
     $Connect = Viro::Connect();
 
-    # Do we have a group?
+    # Do we have a zone id?
     if(isset($_GET['id']) && !empty($_GET['id'])) {
         $zneId = $_GET['id'];
     }else{
@@ -36,7 +36,7 @@
         }
     
         # Update the content field
-        $updateContent = $Connect->prepare('UPDATE "content" SET content = :content WHERE z_id = :z_id');
+        $updateContent = $Connect->prepare('UPDATE content SET content = :content WHERE z_id = :z_id');
         $updateContent->bindValue(':content', $cntEdit);
         $updateContent->bindValue(':z_id', $zneId);
         $updateContentRes = $updateContent->execute();

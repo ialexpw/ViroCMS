@@ -27,8 +27,8 @@
     }
 
     # SELECT Zones
-    $getZones = $Connect->prepare('SELECT * FROM zones WHERE id = :id');
-    $getZones->bindValue(':id', $grpId);
+    $getZones = $Connect->prepare('SELECT * FROM zones WHERE g_id = :g_id');
+    $getZones->bindValue(':g_id', $grpId);
     $getZonesRes = $getZones->execute();
 
     # Deleting a zone
@@ -37,12 +37,12 @@
         $rmId = $_GET['del'];
 
         # Remove the zone
-        $rmZne = $Connect->prepare('DELETE FROM "zones" WHERE id = :id');
+        $rmZne = $Connect->prepare('DELETE FROM zones WHERE id = :id');
         $rmZne->bindValue(':id', $rmId);
         $rmZne->execute();
 
         # Remove the content
-        $rmZne = $Connect->prepare('DELETE FROM "content" WHERE z_id = :z_id');
+        $rmZne = $Connect->prepare('DELETE FROM content WHERE z_id = :z_id');
         $rmZne->bindValue(':z_id', $rmId);
         $rmZne->execute();
 
@@ -150,7 +150,7 @@
                                         echo '<div class="siimple-table-cell">' . $aZone['z_name'] . '</div>';
                                         echo '<div class="siimple-table-cell">' . $aZone['z_slug'] . '</div>';
                                         echo '<div class="siimple-table-cell">' . $getOwnerRes['username'] . '</div>';
-                                        echo '<div class="siimple-table-cell"><a href="?page=content-edit&id=' . $aZone['id'] . '">Edit</a> | <a href="?page=content-zones&id=' . $aZone['id'] . '&del=' . $aZone['id'] . '">Delete</a></div>';
+                                        echo '<div class="siimple-table-cell"><a href="?page=content-edit&id=' . $aZone['id'] . '">Edit</a> | <a href="?page=content-zones&id=' . $aZone['g_id'] . '&del=' . $aZone['id'] . '">Delete</a></div>';
                                         echo '</div>';
                                     }
                                 ?>
