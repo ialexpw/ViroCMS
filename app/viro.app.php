@@ -146,25 +146,6 @@
         }
 
         /**
-         * Viro::Content($content)
-         * Taking in the content hash, this function returns the content for that zone
-         */
-        public static function Content($content) {
-            $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
-
-            # SELECT the content
-            $getContent = $db->prepare('SELECT * FROM "content" WHERE c_hash = :c_hash');
-            $getContent->bindValue(':c_hash', $content);
-            $getContentRes = $getContent->execute();
-
-            # Get content
-            $getContentRes = $getContentRes->fetchArray(SQLITE3_ASSOC);
-
-            # echo the content
-            echo $getContentRes['content'];
-        }
-
-        /**
          * Viro::Permission($page)
          * Taking in the page, this checks if the user has permissions to view the area
          */
@@ -187,6 +168,25 @@
             }else{
                 return false;
             }
+        }
+
+        /**
+         * Viro::Content($content)
+         * Taking in the content hash, this function returns the content for that zone
+         */
+        public static function Content($content) {
+            $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+
+            # SELECT the content
+            $getContent = $db->prepare('SELECT * FROM "content" WHERE c_hash = :c_hash');
+            $getContent->bindValue(':c_hash', $content);
+            $getContentRes = $getContent->execute();
+
+            # Get content
+            $getContentRes = $getContentRes->fetchArray(SQLITE3_ASSOC);
+
+            # echo the content
+            echo $getContentRes['content'];
         }
 
         /**
@@ -328,7 +328,7 @@
             $locVer = str_replace('v', '', $locVer[0]);
 
             # true = update available
-            if($getVer > $locVer) {
+            if($getVer != $locVer) {
                 return true;
             }else{
                 return false;
