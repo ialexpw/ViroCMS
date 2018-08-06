@@ -139,7 +139,7 @@
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
 
-                        <form action="?page=create-zone&amp;hash=<?php echo $grp; ?>" method="post">
+                        <form action="?page=create-zone&amp;id=<?php echo $grp; ?>" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Zone name</div>
                                 <input type="text" class="siimple-input" style="width:375px;" name="zone" placeholder="Example zone">

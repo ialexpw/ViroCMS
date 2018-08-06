@@ -124,7 +124,7 @@
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
                         <div class="siimple-field">
-                            <a href="?page=create-zone&amp;hash=<?php echo $_GET['hash']; ?>"><div class="siimple-btn siimple-btn--primary">Create Zone</div></a>
+                            <a href="?page=create-zone&amp;id=<?php echo $_GET['id']; ?>"><div class="siimple-btn siimple-btn--primary">Create Zone</div></a>
                         </div>
                         <div class="siimple-table siimple-table--striped">
                             <div class="siimple-table-header">
