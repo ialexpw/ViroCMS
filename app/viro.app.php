@@ -312,7 +312,7 @@
          * Return the current version of ViroCMS
          */
         public static function Version() {
-            return "v0.1-alpha";
+            return "v0.1.1-alpha";
         }
 
         /**
