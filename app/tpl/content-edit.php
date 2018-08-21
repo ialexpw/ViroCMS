@@ -53,10 +53,6 @@
     $getContentRes = $getContentRes->fetchArray(SQLITE3_ASSOC);
 
     $pstData = '<?php Viro::Content(' . "'" . $getContentRes['c_hash'] . "'" .  '); ?>';
-
-    # TODO
-    //if(empty($getContentRes)) {
-    //}
 ?>
 <!DOCTYPE html>
 <html lang="en">
