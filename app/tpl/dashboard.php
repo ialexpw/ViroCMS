@@ -13,10 +13,6 @@
 
     global $l;
     $Connect = Viro::Connect();
-
-    # SELECT Groups
-    $getGroups = $Connect->prepare('SELECT * FROM "groups"');
-    $getGroupsRes = $getGroups->execute();
 ?>
 <!DOCTYPE html>
 <html lang="en">

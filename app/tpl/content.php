@@ -20,7 +20,7 @@
     $Connect = Viro::Connect();
 
     # SELECT Groups
-    $getGroups = $Connect->prepare('SELECT * FROM "groups"');
+    $getGroups = $Connect->prepare('SELECT * FROM groups');
     $getGroupsRes = $getGroups->execute();
 
     # Deleting a group
@@ -29,7 +29,7 @@
         $rmId = $_GET['del'];
 
         # Remove the group
-        $rmGrp = $Connect->prepare('DELETE FROM "groups" WHERE id = :id');
+        $rmGrp = $Connect->prepare('DELETE FROM groups WHERE id = :id');
         $rmGrp->bindValue(':id', $rmId);
         $rmGrp->execute();
 

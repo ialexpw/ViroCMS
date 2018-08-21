@@ -40,7 +40,7 @@
         }
 
         # Insert the group
-        $stmt = $Connect->prepare('INSERT INTO "articles" ("title", "u_id", "content", "a_hash", "created", "updated", "published")
+        $stmt = $Connect->prepare('INSERT INTO articles ("title", "u_id", "content", "a_hash", "created", "updated", "published")
                     VALUES (:title, :u_id, :content, "' . $arth . '", "' . $ct . '", "' . $ct . '", "' . $pub . '")');
 
         # Bind

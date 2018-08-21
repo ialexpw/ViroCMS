@@ -62,7 +62,7 @@
     }
 
     # SELECT Users
-    $getUsers = $Connect->prepare('SELECT * FROM "users"');
+    $getUsers = $Connect->prepare('SELECT * FROM users');
     $getUsersRes = $getUsers->execute();
 ?>
 <!DOCTYPE html>

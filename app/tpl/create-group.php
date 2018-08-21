@@ -37,7 +37,7 @@
         $grph = substr(sha1($mts . $grp . $slg), 0, 10);
 
         # Insert the group
-        $stmt = $Connect->prepare('INSERT INTO "groups" ("g_name", "g_slug", "g_hash", "u_id", "created")
+        $stmt = $Connect->prepare('INSERT INTO groups ("g_name", "g_slug", "g_hash", "u_id", "created")
                     VALUES (:group, "' . $slg . '", "' . $grph . '", :u_id, "' . $ts . '")');
 
         # Bind

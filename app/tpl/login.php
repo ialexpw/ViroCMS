@@ -25,7 +25,7 @@
         $usr = $_POST['username'];
 
         # SELECT User
-        $getUser = $Connect->prepare('SELECT * FROM "users" WHERE username = :username');
+        $getUser = $Connect->prepare('SELECT * FROM users WHERE username = :username');
         $getUser->bindValue(':username', $usr);
         $getUserRes = $getUser->execute();
 
@@ -33,8 +33,8 @@
         $getUserRes = $getUserRes->fetchArray(SQLITE3_ASSOC);
 
         # User does not exist (add log?)
-        if(empty($getUserRes)) {
-            echo 'what';
+        if(!$getUserRes) {
+            Viro::LoadPage('login&error');
         }
 
         # Password/login
@@ -48,7 +48,7 @@
             $ts = time();
 
             # SELECT User
-            $updateUser = $Connect->prepare('UPDATE "users" SET last_login = :last_login WHERE username = :username');
+            $updateUser = $Connect->prepare('UPDATE users SET last_login = :last_login WHERE username = :username');
             $updateUser->bindValue(':last_login', $ts);
             $updateUser->bindValue(':username', $usr);
             $updateUserRes = $updateUser->execute();
@@ -135,11 +135,11 @@
                         <form action="?page=login" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Username</div>
-                                <input type="text" class="siimple-input" style="width:375px;" name="username" placeholder="username">
+                                <input type="text" class="siimple-input" style="width:375px;" name="username" placeholder="username" required>
                             </div>
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Password</div>
-                                <input type="password" class="siimple-input" style="width:375px;" name="password" placeholder="password">
+                                <input type="password" class="siimple-input" style="width:375px;" name="password" placeholder="password" required>
                             </div>
                             <div class="siimple-field">
                                 <button type="submit" class="siimple-btn siimple-btn--blue" value="Create group">Login</button>

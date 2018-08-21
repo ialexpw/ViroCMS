@@ -35,7 +35,7 @@
         $ts = time();
 
         # Insert the user
-        $stmt = $Connect->prepare('INSERT INTO "users" ("username", "email", "password", "read", "write", "users", "tools", "last_login", "active")
+        $stmt = $Connect->prepare('INSERT INTO users ("username", "email", "password", "read", "write", "users", "tools", "last_login", "active")
                     VALUES (:username, :email, :password, "on", "off", "off", "off", "0", "' . $ts . '")');
 
         # Bind
