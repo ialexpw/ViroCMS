@@ -281,7 +281,18 @@
          * Function to restore the SQLite database
          */
         public static function Restore($id) {
-            return;
+            # Check the backup exists
+            if(file_exists('app/db/backup/' . $id . '/viro.db')) {
+                # Remove the current db - possibly backup before?
+                unlink('app/db/viro.db');
+
+                # Copy the file in-place
+                if(copy("app/db/backup/$id/viro.db", "app/db/viro.db")) {
+                    return true;
+                }
+            }else{
+                return false;
+            }
         }
 
         /**
