@@ -116,9 +116,15 @@
 
                         <?php
                             while($aArticle = $getArticlesRes->fetchArray(SQLITE3_ASSOC)) {
+                                # Published?
+                                if($aArticle['published']) {
+                                    $state = "PUBLISHED";
+                                }else{
+                                    $state = "DRAFT";
+                                }
                                 echo '<div class="siimple-card" style="max-width:100%;">';
                                 echo '<div class="siimple-card-body">';
-                                echo '<div class="siimple-card-title">' . $aArticle['title'] . '</div>';
+                                echo '<div class="siimple-card-title">' . $aArticle['title'] . '<div class="siimple--float-right">' . $state . '</div></div>';
                                 echo '<p style="max-width:85%;">' . substr(strip_tags($aArticle['content']), 0, 150) . ' ...</p>';
                                 echo '<span class="siimple--float-right"><a href="?page=articles&del=' . $aArticle['id'] . '">Delete</a></span>';
                                 echo '<br /></div>';
