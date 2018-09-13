@@ -18,6 +18,36 @@
 
     global $l;
     $Connect = Viro::Connect();
+
+    # SELECT Groups
+    $getBackups = $Connect->prepare('SELECT * FROM backups ORDER BY id DESC');
+    $getBackupsRes = $getBackups->execute();
+
+    # Create backup
+    if(isset($_GET['create'])) {
+        Viro::Backup();
+
+        Viro::LoadPage('tools');
+    }
+
+    # Restore backup
+    if(isset($_GET['restore']) && !empty($_GET['restore'])) {
+        $resId = $_GET['restore'];
+
+        Viro::Restore($resId);
+
+        Viro::LoadPage('tools');
+    }
+
+    # Deleting a backup
+    if(isset($_GET['del']) && !empty($_GET['del'])) {
+        # Backup id/date
+        $rmId = $_GET['del'];
+
+        Viro::RemoveBackup($rmId);
+
+        Viro::LoadPage('tools');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,14 +123,45 @@
                         <!-- Break line -->
                         <div class="siimple-rule"></div>
 
-                        <div class="siimple-card" style="max-width:300px;">
-                            <div class="siimple-card-body">
-                                <div class="siimple-card-title">Coming soon</div>
-                                <div class="siimple-card-subtitle">Backup / Restore</div>
-                                Backup and restore configurations easily with the click of a button. Download current and previous versions of your CMS.
+                        <div class="siimple-field">
+                            <a href="?page=tools&create"><div class="siimple-btn siimple-btn--primary"><?php Viro::Translate('CretBck', $l); ?></div></a>
+                        </div>
+                        <div class="siimple-table siimple-table--striped">
+                            <div class="siimple-table-header">
+                                <div class="siimple-table-row">
+                                    <div class="siimple-table-cell">Name</div>
+                                    <div class="siimple-table-cell">Backup Date</div>
+                                    <div class="siimple-table-cell">Triggered By</div>
+                                    <div class="siimple-table-cell">Options</div>
+                                </div>
+                            </div>
+                            <div class="siimple-table-body">
+                                <?php
+                                    while($aBackup = $getBackupsRes->fetchArray(SQLITE3_ASSOC)) {
+                                        if(empty($aBackup['u_id'])) {
+                                            $trig = "Command Line (CLI)";
+                                        }else{
+                                            # Lookup the owner
+                                            $getGroupOwner = $Connect->prepare('SELECT * FROM users WHERE id = :id LIMIT 1');
+                                            $getGroupOwner->bindValue(':id', $aBackup['u_id']);
+                                            $getOwnerRes = $getGroupOwner->execute();
+
+                                            # Fetch the array
+                                            $getOwnerRes = $getOwnerRes->fetchArray(SQLITE3_ASSOC);
+
+                                            $trig = $getOwnerRes['username'];
+                                        }
+
+                                        echo '<div class="siimple-table-row">';
+                                        echo '<div class="siimple-table-cell">' . $aBackup['title'] . '</div>';
+                                        echo '<div class="siimple-table-cell">' . date("D M j Y @ G:i", $aBackup['created']) . '</div>';
+                                        echo '<div class="siimple-table-cell">' . $trig . '</div>';
+                                        echo '<div class="siimple-table-cell"><a href="?page=tools&restore=' . $aBackup['created'] . '">Restore</a> | <a href="?page=tools&del=' . $aBackup['created'] . '">Delete</a></div>';
+                                        echo '</div>';
+                                    }
+                                ?>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
