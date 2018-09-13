@@ -2,7 +2,7 @@
     /**
      * example.php
      *
-     * Example file to show ViroCMS can be used
+     * Example file to show how ViroCMS can be used
      *
      * @package    ViroCMS
      * @author     Alex White (https://github.com/ialexpw)
