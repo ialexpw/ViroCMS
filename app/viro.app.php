@@ -277,17 +277,39 @@
         }
 
         /**
-         * Viro::Restore($id)
+         * Viro::RemoveBackup($created)
+         * Function to remove the backup
+         */
+        public static function RemoveBackup($created) {
+            $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+
+            # Delete the database entry
+            $remBackup = $db->prepare('DELETE FROM backups WHERE created = :created');
+            $remBackup->bindValue(':created', $created);
+            $remBackupRes = $remBackup->execute();
+
+            # Delete the folder
+            if(unlink("app/db/backup/" . $created . "/viro.db")) {
+                if(rmdir("app/db/backup/" . $created)) {
+                    return true;
+                }
+            }else{
+                return false;
+            }
+        }
+
+        /**
+         * Viro::Restore($created)
          * Function to restore the SQLite database
          */
-        public static function Restore($id) {
+        public static function Restore($created) {
             # Check the backup exists
-            if(file_exists('app/db/backup/' . $id . '/viro.db')) {
+            if(file_exists('app/db/backup/' . $created . '/viro.db')) {
                 # Remove the current db - possibly backup before?
                 unlink('app/db/viro.db');
 
                 # Copy the file in-place
-                if(copy("app/db/backup/$id/viro.db", "app/db/viro.db")) {
+                if(copy("app/db/backup/$created/viro.db", "app/db/viro.db")) {
                     return true;
                 }
             }else{
