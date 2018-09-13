@@ -37,6 +37,7 @@
         'CretZne'   => 'Create zone',
         'ContEdt'   => 'Edit zone',
         'CretUsr'   => 'Create user',
+        'CretBck'   => 'Create backup',
         'Login'     => 'Login',
         'Tools'     => 'Tools',
         'Users'     => 'Users',
