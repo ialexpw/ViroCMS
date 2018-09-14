@@ -23,10 +23,10 @@
     echo Viro::Article(2, 1);
 
     /**
-     * Will override the default entry, below will return the title of article ID 2
+     * Will override the default entry, below will return the title of article ID 7
      * Possible objects are - id, title, author, content, created, updated
      */
-    echo Viro::Article(2, 1, 'title');
+    echo Viro::Article(7, 1, 'title');
 
     /**
      * Create a backup of the SQLite database
