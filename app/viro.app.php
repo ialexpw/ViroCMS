@@ -190,10 +190,10 @@
         }
 
         /**
-         * Viro::Article($id)
+         * Viro::Article($id, $override, $obj)
          * Select the article based on an index, 1 = latest article
          */
-        public static function Article($id, $override = 0) {
+        public static function Article($id, $override = 0, $obj = '') {
             $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 
             # Offset if ID > 1
@@ -225,17 +225,48 @@
 
             # Exists
             if($getUserRes != false) {
-                $arArr = array(
-                    'id'        => $getArticleRes['id'],
-                    'title'     => $getArticleRes['title'],
-                    'author'    => $getUserRes['username'],
-                    'content'   => htmlentities($getArticleRes['content']),
-                    'created'   => $getArticleRes['created'],
-                    'updated'   => $getArticleRes['updated']
-                );
+                # Get exact object
+                if(!empty($obj)) {
+                    # To lower
+                    $obj = strtolower($obj);
+
+                    # Different objects
+                    switch ($obj) {
+                        case 'id':
+                            $arArr = array('obj' => $getArticleRes['id']);
+                            break;
+                        case 'title':
+                            $arArr = array('obj' => $getArticleRes['title']);
+                            break;
+                        case 'author':
+                            $arArr = array('obj' => $getUserRes['username']);
+                            break;
+                        case 'content':
+                            $arArr = array('obj' => htmlentities($getArticleRes['content']));
+                            break;
+                        case 'created':
+                            $arArr = array('obj' => $getArticleRes['created']);
+                            break;
+                        case 'updated':
+                            $arArr = array('obj' => $getArticleRes['updated']);
+                            break;
+                        default:
+                            $arArr = array('obj' => 'unknown_object');
+                    }
+                }else{
+                    $arArr = array(
+                        'id'        => $getArticleRes['id'],
+                        'title'     => $getArticleRes['title'],
+                        'author'    => $getUserRes['username'],
+                        'content'   => htmlentities($getArticleRes['content']),
+                        'created'   => $getArticleRes['created'],
+                        'updated'   => $getArticleRes['updated']
+                    );
+                }
+                
             }else{
                 $arArr = array(
-                    'error'     => 'not-found'
+                    'error'     => 'not_found'
                 );
             }
 
