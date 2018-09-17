@@ -36,7 +36,7 @@
 
         # Insert the user
         $stmt = $Connect->prepare('INSERT INTO users ("username", "email", "password", "read", "write", "users", "tools", "last_login", "active")
-                    VALUES (:username, :email, :password, "on", "off", "off", "off", "0", "' . $ts . '")');
+                    VALUES (:username, :email, :password, "on", "off", "off", "off", "' . $ts . '", "1")');
 
         # Bind
         $stmt->bindValue(':username', $usr);
