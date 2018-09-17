@@ -136,7 +136,7 @@
                         <form action="?page=create-article" method="post">
                             <div class="siimple-field">
                                 <div class="siimple-field-label">Article title</div>
-                                <input onClick="this.select();" type="text" style="width:50%;" class="siimple-input" name="title" value="">
+                                <input type="text" style="width:50%;" class="siimple-input" name="title" value="">
                             </div>
 
                             <div class="siimple-field">
