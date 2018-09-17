@@ -1,4 +1,15 @@
 <?php
+    /**
+     * viro.php
+     *
+     * File to be used by the CLI calls
+     *
+     * @package    ViroCMS
+     * @author     Alex White (https://github.com/ialexpw)
+     * @copyright  2018 ViroCMS
+     * @license    https://github.com/ialexpw/ViroCMS/blob/master/LICENSE  MIT License
+     * @link       https://viro.app
+     */
     include 'app/viro.app.php';
 
     $db = new SQLite3('app/db/viro.db', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
