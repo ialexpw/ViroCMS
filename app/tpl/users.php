@@ -140,9 +140,9 @@
                         <div class="siimple-rule"></div>
                         <form action="?page=users" method="post">
                             <div class="siimple-field">
-                                <button type="submit" class="siimple-btn siimple-btn--primary" value="Update Permissions">Update permissions</button>
+                                <button type="submit" class="siimple-btn siimple-btn--primary" value="Update Permissions"><?php Viro::Translate('UpdatePerms', $l); ?></button>
                                 <a href="?page=create-user">
-                                    <div class="siimple-btn siimple-btn--primary siimple--float-right">Create user</div>
+                                    <div class="siimple-btn siimple-btn--primary siimple--float-right"><?php Viro::Translate('CretUsr', $l); ?></div>
                                 </a>
                             </div>
                             <div class="siimple-table siimple-table--striped siimple-table--border siimple-table--hover">
