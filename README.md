@@ -23,3 +23,9 @@ Ensure to add a new user once logged in for the first time and disable access fo
 
 ## Notes
 * Using the default install method, the app/db/viro.db file will be accessible via HTTP. It is recommended to configure your web server of choice to block public access to this file. Examples of this will be given in the Wiki in time.
+
+A quick example in nginx would be similar to the below;
+
+~~~~location = /app/db/viro.db {
+        internal;
+}~~~~
