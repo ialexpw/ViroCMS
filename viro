@@ -1,6 +1,0 @@
-#!/bin/bash
-
-if [ $1 == 'backup' ]
-then
-        php app/cli/viro.php backup
-fi
