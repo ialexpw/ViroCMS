@@ -76,7 +76,7 @@
         'CreArt'    => 'Create article',
 
         # users.php
-        '' => 'Update permissions',
+        'UpdatePerms' => 'Update permissions',
         '' => '',
     );
 ?>
