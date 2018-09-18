@@ -26,6 +26,8 @@ Ensure to add a new user once logged in for the first time and disable access fo
 
 A quick example in nginx would be similar to the below;
 
-~~~~location = /app/db/viro.db {
+~~~~
+location = /app/db/viro.db {
         internal;
-}~~~~
+}
+~~~~
